@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour {
     void Update () {
     
         Move();
-        //Jump();
+        
         
     }
 
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour {
     {
 		rigidBody = this.GetComponent<Rigidbody>();
         rigidBody.MovePosition(rigidBody.position + transform.TransformDirection(moveDir) * moveSpeed * Time.deltaTime);
-
+        
     }
     
     
@@ -46,6 +46,7 @@ public class PlayerController : MonoBehaviour {
      {
 		moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")).normalized;
         //moveDir = new Vector3(0.0f, 0.0f, Input.GetAxisRaw("Vertical")).normalized;
+        
     
      }
  
@@ -55,8 +56,8 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //print("Jump");
-            rigidBody.velocity += jumpSpeed * Vector3.up * Time.deltaTime;
-            //rigidBody.AddForce(Vector3.up * jumpSpeed * Time.deltaTime);
+            //rigidBody.velocity += jumpSpeed * Vector3.up * Time.deltaTime;
+            rigidBody.AddForce(Vector3.up * jumpSpeed * Time.deltaTime);
         }
     }
 

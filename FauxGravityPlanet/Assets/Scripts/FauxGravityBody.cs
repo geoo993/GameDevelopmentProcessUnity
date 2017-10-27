@@ -9,10 +9,13 @@ public class FauxGravityBody : MonoBehaviour {
     public BodyType body = BodyType.MovingBody;
     
     public FauxGravityAttractor attractor;
-    public float jumpSpeed = 20.0f;
+    [Range(1.0f, 10.0f)] public float jumpSpeed = 2.0f;
+    [Range(20.0f, 100.0f)] public float rotationSpeed = 50.0f;
     private Transform myTransform;
 
+    public bool isGrounded = false;
     private bool isJump = false;
+
     
     void Start()
     {
@@ -27,25 +30,24 @@ public class FauxGravityBody : MonoBehaviour {
         {
             Jump();
 
-            if (isJump)
-            {
-                attractor.Jump(myTransform, jumpSpeed);
-            }
-            else
-            {
-                attractor.Attract(myTransform);
-            }
+            float jumping = isJump ? jumpSpeed : 1.0f;
+			attractor.Attract(myTransform, jumpSpeed, rotationSpeed);
+            
         }else{
-            attractor.Attract(myTransform);
+            attractor.Attract(myTransform, jumpSpeed, rotationSpeed);
         }
         
     }
     
     void Jump(){
-    
-        if (Input.GetKeyDown(KeyCode.Space))
+
+        if (isGrounded)
         {
-            isJump = true;
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                isJump = true;
+            }
+
         }
         
         if (Input.GetKeyUp(KeyCode.Space))
@@ -53,6 +55,22 @@ public class FauxGravityBody : MonoBehaviour {
             isJump = false;
         }
     }
-    
-    
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Planet"){
+            print("on planet");
+            isGrounded = true;
+        }
+        
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.name == "Planet"){
+            print("off planet");
+            isGrounded = false;
+        }
+    }
+
 }

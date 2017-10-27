@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class FauxGravityAttractor : MonoBehaviour {
 
-    public float gravity = -10.0f;
-    [Range(20.0f, 100.0f)] public float rotationSpeed = 50.0f;
+    private float gravity = -9.820f;
     
+    /*
     public void Jump(Transform body, float jumpSpeed){
     
         Vector3 gravityUp = (body.position - transform.position).normalized;
         Vector3 bodyUp = body.up;
         
         //body.GetComponent<Rigidbody>().velocity += jumpSpeed * bodyUp * Time.deltaTime;
-        body.GetComponent<Rigidbody>().AddForce(bodyUp * jumpSpeed);
+        body.GetComponent<Rigidbody>().AddForce(gravityUp * jumpSpeed);
     }
+    */
     
-    public void Attract(Transform body){
+    public void Attract(Transform body, float jumpSpeed, float rotationSpeed){
         Vector3 gravityUp = (body.position - transform.position).normalized;
         Vector3 bodyUp = body.up;
         
-        body.GetComponent<Rigidbody>().AddForce(gravityUp * gravity);
+        body.GetComponent<Rigidbody>().AddForce(gravityUp * jumpSpeed * gravity);
         
         // give us the rotation between these two vectors or up positions
         Quaternion targetRotation = Quaternion.FromToRotation(bodyUp, gravityUp);

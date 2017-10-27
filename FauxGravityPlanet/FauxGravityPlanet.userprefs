@@ -1,12 +1,7 @@
 ﻿<Properties StartupConfiguration="{CFFD45EE-65FE-AF79-685E-9D413557ECB9}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerController.cs">
     <Files>
-      <File FileName="Assets/Scripts/FauxGravityBody.cs" Line="5" Column="47" />
-      <File FileName="Assets/Scripts/FauxGravityAttractor.cs" Line="14" Column="68" />
-      <File FileName="Assets/Scripts/PlayerController.cs" Line="48" Column="11" />
-      <File FileName="Assets/Scripts/TransformFollower.cs" Line="7" Column="6" />
-      <File FileName="Assets/Scripts/CameraOrbit.cs" Line="16" Column="8" />
-      <File FileName="Assets/Scripts/MouseLook.cs" Line="34" Column="5" />
+      <File FileName="Assets/Scripts/PlayerController.cs" Line="51" Column="2" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

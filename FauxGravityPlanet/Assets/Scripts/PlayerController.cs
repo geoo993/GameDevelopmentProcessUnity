@@ -7,36 +7,27 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    private Camera mainCamera;
-    public GameObject cam;
-    
-    public float moveSpeed = 10.0f;
+    [Range(1.0f, 200.0f)] public float turnSpeed = 100.0f;
+    [Range(1.0f, 20.0f)] public float moveSpeed = 5.0f;
+    public bool autoMove = true;
     private Vector3 moveDirection;
 
     private Rigidbody rigidBody;
 	private FauxGravityBody body;
-    
-    void Awake()
-    {
-         //anim = GetComponent<Animator>();
-    }
-         
+ 
     void Start(){
-        mainCamera = cam.GetComponent<Camera>();
         body = this.GetComponent<FauxGravityBody>();
+        rigidBody = this.GetComponent<Rigidbody>();
     }
     
     void Update () {
     
         Move();
-        
-        MoveTurn();
-        
     }
 
     void FixedUpdate()
     {
-		rigidBody = this.GetComponent<Rigidbody>();
+		//rigidBody = this.GetComponent<Rigidbody>();
         //rigidBody.MovePosition(rigidBody.position + transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime);
        
     }
@@ -44,21 +35,23 @@ public class PlayerController : MonoBehaviour {
 
     void Move()
     {
-        moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")).normalized;
+        //moveDirection = new Vector3(Input.GetAxisRaw("Horizontal"), 0.0f, Input.GetAxisRaw("Vertical")).normalized;
+        moveDirection = Vector3.forward;
+        
+		var x = Input.GetAxis("Horizontal") * Time.deltaTime * turnSpeed; // direction
+        transform.Rotate(0.0f, x, 0.0f);
 
-    }
-    
-    void MoveTurn(){
-		var x = Input.GetAxis("Horizontal") * Time.deltaTime * 150.0f;
-		var z = Input.GetAxis("Vertical") * Time.deltaTime * 3.0f;
-		
-		transform.Rotate(0, x, 0);
-		transform.Translate(0, 0, z);
+        if (autoMove)
+        {
+            transform.Translate(moveDirection * moveSpeed * Time.deltaTime); // auto move forward 
+        }
+        else
+        {
+			var z = Input.GetAxis("Vertical") * Time.deltaTime * moveSpeed; // manuel move
+            transform.Translate(0.0f, 0.0f, z);
+        }
      
      }
- 
-   
-
 
 }
 

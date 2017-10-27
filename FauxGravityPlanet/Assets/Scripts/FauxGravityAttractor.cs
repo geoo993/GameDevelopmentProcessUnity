@@ -6,17 +6,6 @@ public class FauxGravityAttractor : MonoBehaviour {
 
     private float gravity = -9.820f;
     
-    /*
-    public void Jump(Transform body, float jumpSpeed){
-    
-        Vector3 gravityUp = (body.position - transform.position).normalized;
-        Vector3 bodyUp = body.up;
-        
-        //body.GetComponent<Rigidbody>().velocity += jumpSpeed * bodyUp * Time.deltaTime;
-        body.GetComponent<Rigidbody>().AddForce(gravityUp * jumpSpeed);
-    }
-    */
-    
     public void Attract(Transform body, float jumpSpeed, float rotationSpeed){
         Vector3 gravityUp = (body.position - transform.position).normalized;
         Vector3 bodyUp = body.up;

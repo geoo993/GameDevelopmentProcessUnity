@@ -16,7 +16,6 @@ public class FauxGravityBody : MonoBehaviour {
     public bool isGrounded = false;
     private bool isJump = false;
 
-    
     void Start()
     {
         this.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotation;
@@ -30,11 +29,11 @@ public class FauxGravityBody : MonoBehaviour {
         {
             Jump();
 
-            float jumping = isJump ? jumpSpeed : 1.0f;
-			attractor.Attract(myTransform, jumpSpeed, rotationSpeed);
+            float jumping = isJump ? -jumpSpeed : 1.0f;
+			attractor.Attract(myTransform, jumping, rotationSpeed);
             
         }else{
-            attractor.Attract(myTransform, jumpSpeed, rotationSpeed);
+            attractor.Attract(myTransform, 1.0f, rotationSpeed);
         }
         
     }
@@ -58,7 +57,8 @@ public class FauxGravityBody : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == "Planet"){
+        print("collision with "+collision.gameObject.name);
+        if (collision.gameObject.name == "Planet" || collision.gameObject.name == "World"){
             print("on planet");
             isGrounded = true;
         }
@@ -67,7 +67,8 @@ public class FauxGravityBody : MonoBehaviour {
 
     void OnCollisionExit(Collision collision)
     {
-        if (collision.gameObject.name == "Planet"){
+        print("collided with "+collision.gameObject.name);
+        if (collision.gameObject.name == "Planet" || collision.gameObject.name == "World" ){
             print("off planet");
             isGrounded = false;
         }

@@ -105,6 +105,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\MeshSmoothing\Demo\Demo.cs" />
+    <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothing.cs" />
+    <Compile Include="Assets\MeshSmoothing\Scripts\VertexConnection.cs" />
     <Compile Include="Assets\Scripts\CameraMoveAroundPlayer.cs" />
     <Compile Include="Assets\Scripts\CameraOrbit.cs" />
     <Compile Include="Assets\Scripts\CameraSmooth.cs" />

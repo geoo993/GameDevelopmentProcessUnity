@@ -146,11 +146,16 @@
       <Project>{CFFD45EE-65FE-AF79-685E-9D413557ECB9}</Project>
       <Name>FauxGravityPlanet</Name>
     </ProjectReference>
+    <ProjectReference Include="FauxGravityPlanet.unityproj">
+      <Project>{CFFD45EE-65FE-AF79-685E-9D413557ECB9}</Project>
+      <Name>FauxGravityPlanet</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\RoundedCubeGrid.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

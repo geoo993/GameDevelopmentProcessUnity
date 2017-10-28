@@ -105,19 +105,32 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\MeshSmoothing\Demo\Demo.cs" />
+    <Compile Include="Assets\Common\Scripts\BlendWeightAnimationConnector.cs" />
+    <Compile Include="Assets\Common\Scripts\MayaMorphPreparer.cs" />
+    <Compile Include="Assets\Common\Scripts\SkinnedMorphTargets.cs" />
+    <Compile Include="Assets\MeshMorphing\MeshMorphing.cs" />
+    <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothFilter.cs" />
+    <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothFilterDemo.cs" />
     <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothing.cs" />
+    <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothingDemo.cs" />
+    <Compile Include="Assets\MeshSmoothing\Scripts\MeshUtils.cs" />
     <Compile Include="Assets\MeshSmoothing\Scripts\VertexConnection.cs" />
+    <Compile Include="Assets\My Assets\Scripts\MorphDemoGUI.cs" />
     <Compile Include="Assets\Scripts\CameraMoveAroundPlayer.cs" />
     <Compile Include="Assets\Scripts\CameraOrbit.cs" />
     <Compile Include="Assets\Scripts\CameraSmooth.cs" />
+    <Compile Include="Assets\Scripts\CubeSphere.cs" />
+    <Compile Include="Assets\Scripts\FallingObjects.cs" />
     <Compile Include="Assets\Scripts\FauxGravityAttractor.cs" />
     <Compile Include="Assets\Scripts\FauxGravityBody.cs" />
+    <Compile Include="Assets\Scripts\MeshDeformation.cs" />
+    <Compile Include="Assets\Scripts\MeshDeformationInput.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\TransformFollower.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Resources\RoundedCubeGrid.shader" />
     <None Include="Assets\Standard Assets\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\Standard Assets\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

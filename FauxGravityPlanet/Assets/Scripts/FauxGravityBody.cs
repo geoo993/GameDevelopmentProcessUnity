@@ -11,6 +11,8 @@ public class FauxGravityBody : MonoBehaviour {
     public FauxGravityAttractor attractor;
     [Range(1.0f, 10.0f)] public float jumpSpeed = 2.0f;
     [Range(20.0f, 100.0f)] public float rotationSpeed = 50.0f;
+    [Range(-50.0f, -9.820f)] public float gravity = -9.820f;
+    
     private Transform myTransform;
 
     public bool isGrounded = false;
@@ -28,14 +30,14 @@ public class FauxGravityBody : MonoBehaviour {
         if (body == BodyType.MovingBody)
         {
             Jump();
-
+            
             float jumping = isJump ? -jumpSpeed : 1.0f;
-			attractor.Attract(myTransform, jumping, rotationSpeed);
+			attractor.Attract(myTransform, gravity, jumping, rotationSpeed);
             
         }else{
-            attractor.Attract(myTransform, 1.0f, rotationSpeed);
+            attractor.Attract(myTransform, gravity, 1.0f, rotationSpeed);
         }
-        
+
     }
     
     void Jump(){
@@ -46,20 +48,25 @@ public class FauxGravityBody : MonoBehaviour {
             {
                 isJump = true;
             }
-
+            
         }
         
         if (Input.GetKeyUp(KeyCode.Space))
         {
             isJump = false;
         }
+        
+        
+        Rigidbody rig = this.GetComponent<Rigidbody>();
+        if (rig.velocity.y > 4.0f) isJump = false;
+        
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        print("collision with "+collision.gameObject.name);
-        if (collision.gameObject.name == "Planet" || collision.gameObject.name == "World"){
-            print("on planet");
+        //print("collision with "+collision.gameObject.name);
+        if (collision.gameObject.tag == "Planet"){
+            //print("on planet");
             isGrounded = true;
         }
         
@@ -67,9 +74,9 @@ public class FauxGravityBody : MonoBehaviour {
 
     void OnCollisionExit(Collision collision)
     {
-        print("collided with "+collision.gameObject.name);
-        if (collision.gameObject.name == "Planet" || collision.gameObject.name == "World" ){
-            print("off planet");
+        //print("collided with "+collision.gameObject.name);
+        if (collision.gameObject.tag == "Planet"){
+            //print("off planet");
             isGrounded = false;
         }
     }

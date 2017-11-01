@@ -6,6 +6,7 @@ public class CubeSphere : MonoBehaviour {
 	[Range(2,50)] public int gridSize = 0;
 
 	[Range(0,20)] public float radius = 1f;
+    public string objName;
 
 	private SphereCollider sphereCollider; 
 	private MeshCollider meshCollider;
@@ -51,7 +52,7 @@ public class CubeSphere : MonoBehaviour {
 
 	private void CreateMesh () {
 
-		this.name =  "sphereCube";
+		this.name =  objName;
 
 		meshFilter = GetComponent<MeshFilter>();
 		if (meshFilter == null){

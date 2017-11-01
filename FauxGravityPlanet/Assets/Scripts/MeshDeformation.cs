@@ -35,7 +35,7 @@ public class MeshDeformation : MonoBehaviour {
 	public void AddDeformingForce (Vector3 point, float force) 
 	{
 		point = transform.InverseTransformPoint(point);
-		//Debug.DrawLine(Camera.main.transform.position, point);
+		Debug.DrawLine(Camera.main.transform.position, point);
 	
 		for (int i = 0; i < displacedVertices.Length; i++) 
 		{

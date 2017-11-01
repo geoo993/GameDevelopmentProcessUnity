@@ -57,7 +57,7 @@ public class NPCWander : MonoBehaviour {
         heading = Random.Range(0, 360);
         transform.eulerAngles = new Vector3(0, heading, 0);
         
-        this.transform.position = getRandomPos();
+        //this.transform.position = getRandomPos();
         AddGravityBody(this.gameObject);
         
         StartCoroutine(NewHeading(directionChangeInterval));
@@ -158,7 +158,7 @@ public class NPCWander : MonoBehaviour {
             //rotate to look at the player
             Vector3 relativePos = target.transform.position - transform.position;
             Quaternion look = Quaternion.LookRotation(relativePos);
-            transform.rotation = Quaternion.Slerp(this.transform.rotation, look, rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, look, rotationSpeed * Time.deltaTime);
             forwardVec = transform.forward;
             //move
             if (distance > stop)
@@ -171,9 +171,9 @@ public class NPCWander : MonoBehaviour {
     }
     
     void Wander(){
-        transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, Time.deltaTime * directionChangeInterval);
+        transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, targetRotation, directionChangeInterval * Time.deltaTime);
         Vector3 forward = transform.TransformDirection(Vector3.forward);
-        forwardVec = forward;
+        forwardVec = transform.forward; //forward;
         Move();
     }
     

@@ -7,20 +7,26 @@ using UnityEngine;
 
 public class FallingObjects : MonoBehaviour {
 
-     [SerializeField, Range(0.0f, 10.0f)] float minTime = 5f; 
-     [SerializeField, Range(1.0f, 10.0f)] float maxTime = 10f;
-     [SerializeField, Range(100, 500)] int count = 200;
-     [SerializeField, Range(1.0f, 50.0f)] float awayOffset = 5.0f;
-     public GameObject faller;
-     public GameObject planet;
+    [SerializeField, Range(0.0f, 10.0f)] float minTime = 5f; 
+    [SerializeField, Range(1.0f, 10.0f)] float maxTime = 10f;
+    [SerializeField, Range(100, 500)] int count = 200;
+    [SerializeField, Range(1.0f, 50.0f)] float awayOffset = 5.0f;
+    public GameObject faller;
+    public GameObject planet;
     
-     public bool doSpawn = true;
-     
-	 void Start() {
+    public bool doSpawn = true;
+    
+    void Start() {
         StartCoroutine(Spawner());
-     }
-     
-     IEnumerator Spawner() {
+    }
+
+    void Update()
+    {
+		
+    }
+    
+
+    IEnumerator Spawner() {
         while (doSpawn && count > 0) {
             // to spawn around a planet, you need the planet (sphere) radius, spawn character ( known as fallingObject) height and planet position
             float planetRadius = planet.transform.localScale.x * 0.5f;
@@ -44,4 +50,7 @@ public class FallingObjects : MonoBehaviour {
             yield return new WaitForSeconds(Random.Range(minTime, maxTime));
          }
      }
+
+    
+     
 }

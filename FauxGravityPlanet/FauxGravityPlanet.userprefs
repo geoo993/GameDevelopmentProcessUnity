@@ -1,5 +1,5 @@
 ﻿<Properties StartupConfiguration="{CFFD45EE-65FE-AF79-685E-9D413557ECB9}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/NPCWander.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Shredder.cs">
     <Files>
       <File FileName="Assets/Scripts/MeshDeformation.cs" Line="38" Column="3" />
       <File FileName="Assets/Scripts/CubeSphere.cs" Line="8" Column="41" />
@@ -7,6 +7,7 @@
       <File FileName="Assets/Scripts/NPCWander.cs" Line="176" Column="43" />
       <File FileName="Assets/Scripts/Destroyer.cs" Line="28" Column="1" />
       <File FileName="Assets/Scripts/FauxGravityBody.cs" Line="38" Column="1" />
+      <File FileName="Assets/Scripts/Shredder.cs" Line="18" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

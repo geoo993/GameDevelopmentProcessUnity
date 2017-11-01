@@ -127,6 +127,7 @@
     <Compile Include="Assets\Scripts\NPCController.cs" />
     <Compile Include="Assets\Scripts\NPCWander.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\Shredder.cs" />
     <Compile Include="Assets\Scripts\TransformFollower.cs" />
     <Compile Include="Assets\Scripts\World.cs" />
   </ItemGroup>

@@ -78,4 +78,6 @@ public class MeshDeformation : MonoBehaviour {
 		displacedVertices[i] += velocity * (Time.deltaTime / uniformScale);
 
 	}
+    
+    
 }

@@ -11,7 +11,7 @@ public class FallingObjects : MonoBehaviour {
     [SerializeField, Range(1.0f, 10.0f)] float maxTime = 10f;
     [SerializeField, Range(100, 500)] int count = 200;
     [SerializeField, Range(1.0f, 50.0f)] float awayOffset = 5.0f;
-    public GameObject faller;
+    public GameObject[] fallers;
     public GameObject planet;
     
     public bool doSpawn = true;
@@ -28,6 +28,8 @@ public class FallingObjects : MonoBehaviour {
 
     IEnumerator Spawner() {
         while (doSpawn && count > 0) {
+
+            GameObject faller = fallers[Random.Range(0, 2)];
             // to spawn around a planet, you need the planet (sphere) radius, spawn character ( known as fallingObject) height and planet position
             float planetRadius = planet.transform.localScale.x * 0.5f;
             float fallerheight = faller.transform.localScale.y * 0.5f;

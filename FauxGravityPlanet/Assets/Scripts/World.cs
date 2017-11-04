@@ -265,9 +265,12 @@ public class World : MonoBehaviour {
 
         meshRenderer = GetComponent<MeshRenderer>();
         meshRenderer.sharedMaterials = new Material[]{
-            Resources.Load ("RoundedX") as Material,
-            Resources.Load ("RoundedY") as Material,
-            Resources.Load ("RoundedZ") as Material
+            //Resources.Load ("RoundedX") as Material,
+            //Resources.Load ("RoundedY") as Material,
+            //Resources.Load ("RoundedZ") as Material
+            Resources.Load ("Lava1") as Material,
+            Resources.Load ("Lava1") as Material,
+            Resources.Load ("Lava1") as Material
         };
 
 

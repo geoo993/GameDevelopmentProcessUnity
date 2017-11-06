@@ -268,9 +268,9 @@ public class World : MonoBehaviour {
             //Resources.Load ("RoundedX") as Material,
             //Resources.Load ("RoundedY") as Material,
             //Resources.Load ("RoundedZ") as Material
-            Resources.Load ("Lava1") as Material,
-            Resources.Load ("Lava1") as Material,
-            Resources.Load ("Lava1") as Material
+            Resources.Load ("Planet") as Material,
+            Resources.Load ("Planet") as Material,
+            Resources.Load ("Planet") as Material
         };
 
 

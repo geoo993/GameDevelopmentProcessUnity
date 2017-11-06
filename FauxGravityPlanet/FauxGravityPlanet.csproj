@@ -112,6 +112,8 @@
     <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothingDemo.cs" />
     <Compile Include="Assets\MeshSmoothing\Scripts\MeshUtils.cs" />
     <Compile Include="Assets\MeshSmoothing\Scripts\VertexConnection.cs" />
+    <Compile Include="Assets\ParticlesExamples\PorglezompPyroclastics\ExplosionMat.cs" />
+    <Compile Include="Assets\ParticlesExamples\Sun\RotateObject.cs" />
     <Compile Include="Assets\Scripts\CameraMoveAroundPlayer.cs" />
     <Compile Include="Assets\Scripts\CameraOrbit.cs" />
     <Compile Include="Assets\Scripts\CameraSmooth.cs" />
@@ -124,6 +126,7 @@
     <Compile Include="Assets\Scripts\MeshDeformationInput.cs" />
     <Compile Include="Assets\Scripts\MeshDeformerObject.cs" />
     <Compile Include="Assets\Scripts\MouseLook.cs" />
+    <Compile Include="Assets\Scripts\MovePlayer.cs" />
     <Compile Include="Assets\Scripts\NPCController.cs" />
     <Compile Include="Assets\Scripts\NPCWander.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
@@ -132,6 +135,8 @@
     <Compile Include="Assets\Scripts\World.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\ParticlesExamples\PorglezompPyroclastics\Explosion.shader" />
+    <None Include="Assets\ParticlesExamples\Sun\DissolveToTransparent.shader" />
     <None Include="Assets\Resources\RoundedCubeGrid.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,6 +13,7 @@ public class HoverController : MonoBehaviour {
     
     public bool autoMove = true;
 
+    public bool Swerve = true;
     
 	//reference variable we don't directly use:
 	private float rotationVelocity, groundAngleVelocity;
@@ -57,31 +58,34 @@ public class HoverController : MonoBehaviour {
 			rigidBody.drag = 0;
 		}
 
-        /*
-		////you can turn in the air or on the ground:
-		Vector3 turnTorque = Vector3.up * rotationRate * Input.GetAxis ("Horizontal");
+        if (Swerve)
+        {
+            ////you can turn in the air or on the ground:
+            Vector3 turnTorque = Vector3.up * rotationRate * Input.GetAxis("Horizontal");
 
-		////correct the force for deltatime and vehicle mass:
-		turnTorque = turnTorque * Time.deltaTime * rigidBody.mass;
-		rigidBody.AddTorque (turnTorque);
-
-
-		////"Fake" rotate the car when you are turning:
-		Vector3 newRotation = transform.eulerAngles;
-		float zRotation = Mathf.SmoothDampAngle (
-			newRotation.z, 
-            Input.GetAxis ("Horizontal") * -turnRotationAngle,
-			ref rotationVelocity, 
-            turnRotationSeekSpeed
-        );
-		newRotation = new Vector3 (newRotation.x, newRotation.y, zRotation);
-		transform.eulerAngles = newRotation;
-
-        */
-      
-        var x = Input.GetAxis("Horizontal") * Time.deltaTime * rotationRate; // direction
-        transform.Rotate(0.0f, x, 0.0f);
+            ////correct the force for deltatime and vehicle mass:
+            turnTorque = turnTorque * Time.deltaTime * rigidBody.mass;
+            rigidBody.AddTorque(turnTorque);
 
 
+            ////"Fake" rotate the car when you are turning:
+            Vector3 newRotation = transform.eulerAngles;
+            float zRotation = Mathf.SmoothDampAngle(
+                newRotation.z,
+                Input.GetAxis("Horizontal") * -turnRotationAngle,
+                ref rotationVelocity,
+                turnRotationSeekSpeed
+            );
+            newRotation = new Vector3(newRotation.x, newRotation.y, zRotation);
+            transform.eulerAngles = newRotation;
+        }
+        else
+        {
+
+            var x = Input.GetAxis("Horizontal") * Time.deltaTime * rotationRate; // direction
+            transform.Rotate(0.0f, x, 0.0f);
+        }
+        
+        
 	}
 }

@@ -122,6 +122,10 @@
     <Compile Include="Assets\Scripts\FallingObjects.cs" />
     <Compile Include="Assets\Scripts\FauxGravityAttractor.cs" />
     <Compile Include="Assets\Scripts\FauxGravityBody.cs" />
+    <Compile Include="Assets\Scripts\GenerateBlock.cs" />
+    <Compile Include="Assets\Scripts\GenerateCollectable.cs" />
+    <Compile Include="Assets\Scripts\GenerateCrystals.cs" />
+    <Compile Include="Assets\Scripts\GenerateRoad.cs" />
     <Compile Include="Assets\Scripts\HoverController.cs" />
     <Compile Include="Assets\Scripts\MeshDeformation.cs" />
     <Compile Include="Assets\Scripts\MeshDeformationInput.cs" />

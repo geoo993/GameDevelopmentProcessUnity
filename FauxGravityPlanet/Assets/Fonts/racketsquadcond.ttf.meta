@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b16cc5cf2e0a54a67a8515617b5c29ad
+timeCreated: 1510751269
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Condensed
+  fontNames:
+  - Racket Squad Condensed
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

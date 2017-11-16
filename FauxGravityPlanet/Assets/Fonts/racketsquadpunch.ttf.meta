@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3b1c3c69011e24924a4b6e40bb0ed2ff
+timeCreated: 1510751269
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Punch
+  fontNames:
+  - Racket Squad Punch
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

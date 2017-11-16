@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 84e8787d0718649e592799459cb6c413
+timeCreated: 1510751222
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DK Southwark
+  fontNames:
+  - DK Southwark
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class GenerateBlock : MonoBehaviour {
 
-    public GameObject block;
+    public GameObject[] blocks;
     
     
-    private int blockCreated = 2;
+    public static int blocksCreated = 2;
+    public static int blocksDestroyed = 0;
     private bool ShouldCollider = true;
     
 	
 
     void GenerateNewBlock(){
-        Vector3 blockPosition = new Vector3(0.0f, 0.0f, 100.0f * blockCreated);
-        GameObject newBlock = Instantiate(block, blockPosition, Quaternion.identity) as GameObject;
+        Vector3 blockPosition = new Vector3(0.0f, 0.0f, 100.0f * blocksCreated);
+        GameObject newBlock = Instantiate(blocks[Random.Range(0, blocks.Length)], blockPosition, Quaternion.identity) as GameObject;
         
-        blockCreated += 1;
+        blocksCreated += 1;
+        blocksDestroyed += 1;
     }
 
     void ResetCollider()

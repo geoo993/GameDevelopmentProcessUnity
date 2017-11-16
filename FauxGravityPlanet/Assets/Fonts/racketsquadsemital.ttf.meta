@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: fb891e598ba6b4dd1992106b73b50024
+timeCreated: 1510751269
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Semi-Italic
+  fontNames:
+  - Racket Squad Semi-Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

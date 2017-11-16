@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 837f994d7d5184d3b8e5291e425058e1
+timeCreated: 1510751249
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Howlin' Mad Staggered
+  fontNames:
+  - Howlin' Mad Staggered
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

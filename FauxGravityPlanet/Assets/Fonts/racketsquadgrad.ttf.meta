@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 8755ecee6d1834bda9b0edbba71cb875
+timeCreated: 1510751269
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Gradient
+  fontNames:
+  - Racket Squad Gradient
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

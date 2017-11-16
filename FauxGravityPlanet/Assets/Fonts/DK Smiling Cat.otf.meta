@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 6299c0c38a4a64251b749c95de0435c4
+timeCreated: 1510751212
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: DK Smiling Cat
+  fontNames:
+  - DK Smiling Cat
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

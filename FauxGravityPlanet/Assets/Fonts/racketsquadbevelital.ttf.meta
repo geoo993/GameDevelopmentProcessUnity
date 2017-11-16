@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e31407bf202d14a84abe43e62d8c1f88
+timeCreated: 1510751269
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Bevel Italic
+  fontNames:
+  - Racket Squad Bevel Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

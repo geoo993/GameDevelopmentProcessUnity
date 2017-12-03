@@ -105,6 +105,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Hover\HoverCarControl.cs" />
+    <Compile Include="Assets\Hover\HoverFollowCam.cs" />
     <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothFilter.cs" />
     <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothFilterDemo.cs" />
     <Compile Include="Assets\MeshSmoothing\Scripts\MeshSmoothing.cs" />
@@ -152,6 +154,7 @@
     <None Include="Assets\ParticlesExamples\PorglezompPyroclastics\Explosion.shader" />
     <None Include="Assets\ParticlesExamples\Sun\DissolveToTransparent.shader" />
     <None Include="Assets\Resources\RoundedCubeGrid.shader" />
+    <None Include="Assets\Sample Assets\Vehicles\Car\Shaders\DiffuseReflectiveShader.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

@@ -1,13 +1,6 @@
 ﻿<Properties StartupConfiguration="{CFFD45EE-65FE-AF79-685E-9D413557ECB9}|">
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CollectableHover.cs">
     <Files>
-      <File FileName="Assets/Scripts/HoverController.cs" Line="89" Column="9" />
-      <File FileName="Assets/Scripts/Thruster.cs" Line="8" Column="5" />
-      <File FileName="Assets/Scripts/GenerateCrystals.cs" Line="18" Column="5" />
-      <File FileName="Assets/Scripts/GenerateBlock.cs" Line="21" Column="30" />
-      <File FileName="Assets/Scripts/GenerateCollectable.cs" Line="5" Column="4" />
-      <File FileName="Assets/Scripts/FallingObjects.cs" Line="14" Column="66" />
-      <File FileName="Assets/Scripts/Destroyer.cs" Line="15" Column="6" />
       <File FileName="Assets/Scripts/DropZone.cs" Line="5" Column="35" />
       <File FileName="Assets/Scripts/CollectableHover.cs" Line="60" Column="56" />
     </Files>

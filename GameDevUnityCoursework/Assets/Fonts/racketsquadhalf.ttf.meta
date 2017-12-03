@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: fbb1290a9582d4fc59c1ac9edd077e2f
+timeCreated: 1512248855
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Halftone
+  fontNames:
+  - Racket Squad Halftone
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

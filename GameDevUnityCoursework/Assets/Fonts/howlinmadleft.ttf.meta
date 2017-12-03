@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: ffb25a8f453df423ca2f11e739706433
+timeCreated: 1512248855
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Howlin' Mad Leftalic
+  fontNames:
+  - Howlin' Mad Leftalic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

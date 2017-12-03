@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 47f0b8842b3a942338cbdd7c6cf12ad3
+timeCreated: 1512248854
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Howlin' Mad Shadow Italic
+  fontNames:
+  - Howlin' Mad Shadow Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -24,13 +24,14 @@ public class HoverBoardControl : MonoBehaviour
     // movement
     public float m_forwardAcl = 100.0f;
     public float m_backwardAcl = 25.0f;
+    public float m_speedBoost = 1500.0f;
     private float m_currThrust = 0.0f;
     
     public float m_turnStrength = 10f;
     private float m_currTurn = 0.0f;
 
-    public bool enableAutoMove;
-    public bool enableSwerve;
+    public bool m_enableAutoMove;
+    public bool m_enableSwerve;
     
     private bool isGrounded;
     private bool isJumping;
@@ -102,6 +103,7 @@ public class HoverBoardControl : MonoBehaviour
     void FixedUpdate()
     {
         ApplyTrust();
+		ApplySpeedBoost();
         
         //  Hover Force
         RaycastHit hit;
@@ -152,7 +154,7 @@ public class HoverBoardControl : MonoBehaviour
             
         
         
-        if (enableSwerve)
+        if (m_enableSwerve)
         {
             ApplyTorque();
         } else {
@@ -172,7 +174,7 @@ public class HoverBoardControl : MonoBehaviour
         // Main Thrust
         m_currThrust = 0.0f;
 
-        if (enableAutoMove)
+        if (m_enableAutoMove)
         {
             m_currThrust = m_forwardAcl;
         }else {
@@ -202,18 +204,18 @@ public class HoverBoardControl : MonoBehaviour
     
     void ApplyTrust() {
         // Forward
-        if (Mathf.Abs(m_currThrust) > 0)
+        if (Mathf.Abs(m_currThrust) > 0.0f)
         {
-            m_body.AddForce(transform.forward * m_currThrust);
+            m_body.AddForce(transform.forward * m_currThrust );
         }
     }
     
     void ApplyTorque() {
         // Turn
-        if (m_currTurn > 0)
+        if (m_currTurn > 0.0f)
         {
             m_body.AddRelativeTorque(Vector3.up * m_currTurn * m_turnStrength); // we rotate right when +m_currTurn
-        } else if (m_currTurn < 0)
+        } else if (m_currTurn < 0.0f)
         {
             m_body.AddRelativeTorque(Vector3.up * m_currTurn * m_turnStrength); // we rotate left when -m_currTurn
         }
@@ -241,6 +243,12 @@ public class HoverBoardControl : MonoBehaviour
             isJumping = true;
         }
 
+    }
+    
+    void ApplySpeedBoost(){
+        if (Input.GetKeyDown(KeyCode.Z)){
+            m_body.AddForce(transform.forward * m_speedBoost, ForceMode.Impulse);
+        }
     }
 
  

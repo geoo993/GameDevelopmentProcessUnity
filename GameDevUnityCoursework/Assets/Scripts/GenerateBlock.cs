@@ -5,20 +5,29 @@ using UnityEngine;
 public class GenerateBlock : MonoBehaviour {
 
     public GameObject[] blocks;
-    
+    public GameObject[] crystals;
     
     public static int blocksCreated = 2;
     public static int blocksDestroyed = 0;
     private bool ShouldCollider = true;
     
-	
-
     void GenerateNewBlock(){
         Vector3 blockPosition = new Vector3(0.0f, 0.0f, 100.0f * blocksCreated);
         GameObject newBlock = Instantiate(blocks[Random.Range(0, blocks.Length)], blockPosition, Quaternion.identity) as GameObject;
         
+        Transform collectables = newBlock.transform.Find("Collectables");
+        SpawnCollectableItemIn(collectables);
+        
         blocksCreated += 1;
         blocksDestroyed += 1;
+    }
+    
+    void SpawnCollectableItemIn( Transform collectables){
+        
+        foreach (Transform child in collectables) {
+            GameObject collectable = Instantiate(crystals[Random.Range(0, crystals.Length)], child.position, Quaternion.identity) as GameObject;
+            collectable.transform.parent = child;
+        }
     }
 
     void ResetCollider()

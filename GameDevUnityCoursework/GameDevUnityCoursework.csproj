@@ -107,10 +107,11 @@
   <ItemGroup>
     <Compile Include="Assets\ParticlesExamples\PorglezompPyroclastics\ExplosionMat.cs" />
     <Compile Include="Assets\ParticlesExamples\Sun\RotateObject.cs" />
+    <Compile Include="Assets\Scripts\CameraAnimator.cs" />
     <Compile Include="Assets\Scripts\CameraMoveAroundPlayer.cs" />
     <Compile Include="Assets\Scripts\CameraOrbit.cs" />
     <Compile Include="Assets\Scripts\CameraSmooth.cs" />
-    <Compile Include="Assets\Scripts\CollectableHover.cs" />
+    <Compile Include="Assets\Scripts\CollectableItem.cs" />
     <Compile Include="Assets\Scripts\Destroyer.cs" />
     <Compile Include="Assets\Scripts\DropZone.cs" />
     <Compile Include="Assets\Scripts\Fade.cs" />

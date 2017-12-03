@@ -2,12 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class Shredder : MonoBehaviour {
 
+    private BoxCollider boxCollider {
+        get{
+            return GetComponent<BoxCollider>();
+        }
+    }
+    
     [SerializeField, Range(0.0f, 10.0f)] float forwardSpeed;
     
     private GameObject[] ramps;
     private GameObject[] boxes;
+    private GameObject[] blocks;
     
     void ShredRamps(){
         ramps = GameObject.FindGameObjectsWithTag("Ramp");
@@ -24,9 +32,17 @@ public class Shredder : MonoBehaviour {
             if (transform.position.z > box.transform.position.z){
                 //Destroy(box);
             }
-
-            if (transform.position.y < 50.0f){
-                Destroy(box);
+        }
+        
+    }
+    
+    void ShredBlocks(){
+        Vector3 size = boxCollider.bounds.size;
+        blocks = GameObject.FindGameObjectsWithTag("Block");
+        foreach (GameObject block in blocks){
+			float boundary = block.transform.position.z + size.z;
+            if (transform.position.z > boundary){
+                Destroy(block);
             }
         }
         
@@ -38,6 +54,7 @@ public class Shredder : MonoBehaviour {
 
         ShredRamps();
         ShredBoxes();
+        ShredBlocks();
     }
 
     void OnCollisionEnter(Collision collision)

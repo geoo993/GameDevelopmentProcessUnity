@@ -5,7 +5,7 @@ using UnityEngine;
 public class GenerateBlock : MonoBehaviour {
 
     public GameObject[] blocks;
-    public GameObject[] crystals;
+    public GameObject[] collectableItems;
     
     public static int blocksCreated = 2;
     public static int blocksDestroyed = 0;
@@ -25,7 +25,7 @@ public class GenerateBlock : MonoBehaviour {
     void SpawnCollectableItemIn( Transform collectables){
         
         foreach (Transform child in collectables) {
-            GameObject collectable = Instantiate(crystals[Random.Range(0, crystals.Length)], child.position, Quaternion.identity) as GameObject;
+            GameObject collectable = Instantiate(collectableItems[Random.Range(0, collectableItems.Length)], child.position, Quaternion.identity) as GameObject;
             collectable.transform.parent = child;
         }
     }

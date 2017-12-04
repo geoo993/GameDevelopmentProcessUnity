@@ -7,6 +7,7 @@ public class PlayerPrefsManager : MonoBehaviour {
 
     const string MASTER_VOLUME_KEY = "master_volume";
     const string DIFFICULTY_KEY = "difficulty";
+    const string BODY_KEY = "body";
     const string LEVEL_KEY = "level_unlocked_";
    
     // Master Volume
@@ -36,6 +37,21 @@ public class PlayerPrefsManager : MonoBehaviour {
     
     public static float GetDifficulty(){
         return PlayerPrefs.GetFloat(DIFFICULTY_KEY);
+    }
+    
+    
+    // Player Body
+    public static void SetPlayerBody(int body){
+        if (body >= 0 && body < 2)
+        {
+            PlayerPrefs.SetInt(BODY_KEY, body);
+        }else{
+            Debug.LogError("player body value out of range");
+        }
+    }
+    
+    public static int GetPlayerBody(){
+        return PlayerPrefs.GetInt(BODY_KEY);
     }
     
     

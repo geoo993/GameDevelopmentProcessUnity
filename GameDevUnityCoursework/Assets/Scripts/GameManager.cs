@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour {
 
     private int difficulty = 2;
     private MusicManager musicManager;
+    public GameObject[] player;
     
 	static GameManager instance = null;
     
@@ -19,7 +20,6 @@ public class GameManager : MonoBehaviour {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        
     }
 
     void Start()
@@ -35,8 +35,21 @@ public class GameManager : MonoBehaviour {
 
         float diff = PlayerPrefsManager.GetDifficulty();
         SetDifficulty(diff);
-    }
 
+
+        int playerBody = PlayerPrefsManager.GetPlayerBody();
+        SetPlayerBody(playerBody);
+    }
+    
+    public void SetPlayerBody(int body){
+        foreach(GameObject obj in player){
+            obj.SetActive(false);
+        }
+        player[body].SetActive(true);
+        Camera.main.GetComponent<MouseOrbit>().target = player[body].transform;
+    }
+    
+    
     public void SetDifficulty(float diff){
         difficulty = Mathf.RoundToInt(diff);
     }

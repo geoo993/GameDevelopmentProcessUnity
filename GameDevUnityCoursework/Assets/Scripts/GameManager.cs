@@ -15,10 +15,19 @@ public class GameManager : MonoBehaviour {
     private int scoreCount = 0;
     
     public static GameObject selectedButton;
-    private GameObject[] buttons;
+    private GameObject[] buttons{
+        get{
+            return GameObject.FindGameObjectsWithTag("Button");
+        }
+    }
     
     private int difficulty = 2;
-    private MusicManager musicManager;
+    private MusicManager musicManager
+    {
+        get {
+            return FindObjectOfType<MusicManager>();
+        }
+    }
     
 	static GameManager instance = null;
     
@@ -36,10 +45,6 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
-        buttons = GameObject.FindGameObjectsWithTag("Button");
-        
-        musicManager = FindObjectOfType<MusicManager>();
-
         if (musicManager){
             float volume = PlayerPrefsManager.GetMasterVolume();
             musicManager.SetVolume(volume);
@@ -53,26 +58,42 @@ public class GameManager : MonoBehaviour {
         int playerBody = PlayerPrefsManager.GetPlayerBody();
         SetPlayerBody(playerBody);
 
-        //SetScore(scoreCount);
+    }
+    void CreatePlayer(PlayerType player){
+
+        if (player == PlayerType.Blue)
+        {
+            GameObject blueplayer = Instantiate(bluePlayer, bluePlayer.transform.position, bluePlayer.transform.rotation) as GameObject;
+            //Camera.main.GetComponent<MouseOrbit>().target = blueplayer.transform;
+        }
+        
+        if (player == PlayerType.Green){
+            GameObject greenplayer = Instantiate(greenPlayer, greenPlayer.transform.position, greenPlayer.transform.rotation) as GameObject;
+            //Camera.main.GetComponent<MouseOrbit>().target = greenplayer.transform;
+        }
     }
     
     public void SetPlayerBody(int body){
 
         playerType = (body == 0) ? PlayerType.Blue : PlayerType.Green;
-        
-        if (playerType == PlayerType.Blue){
-            Camera.main.GetComponent<MouseOrbit>().target = bluePlayer.transform;
-            bluePlayer.SetActive(true);
-            greenPlayer.SetActive(false);
-        }else {
-			Camera.main.GetComponent<MouseOrbit>().target = greenPlayer.transform;
-            bluePlayer.SetActive(false);
-            greenPlayer.SetActive(true);
-        }
+        CreatePlayer(playerType);
     }
     
     public void SetDifficulty(float diff){
         difficulty = Mathf.RoundToInt(diff);
+        
+        // set asteroid falling amount
+        // set max player speed
+        // set road speed
+        if (difficulty == 1){
+        
+        }else if (difficulty == 2){
+        
+        }else if (difficulty == 3){
+        
+        }else {
+        
+        }
     }
     
     public int GetCurrentDifficulty(){

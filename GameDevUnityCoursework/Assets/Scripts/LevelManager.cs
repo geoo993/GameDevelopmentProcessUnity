@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour {
 
     [SerializeField, Range(0.0f, 10.0f)] float autoLoadNextLevel;
-
+    
     void Start()
     {
         if (SceneManager.GetActiveScene().buildIndex < 1 && autoLoadNextLevel > 0.0f)

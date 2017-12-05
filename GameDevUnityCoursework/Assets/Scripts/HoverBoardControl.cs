@@ -92,7 +92,6 @@ public class HoverBoardControl : MonoBehaviour
             }
         }
     }
-    
     */
     
     void Update()

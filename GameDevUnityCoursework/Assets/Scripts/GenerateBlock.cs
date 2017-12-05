@@ -23,9 +23,10 @@ public class GenerateBlock : MonoBehaviour {
     }
     
     void SpawnCollectableItemIn( Transform collectables){
-        
+        GameObject itemToSpawn = collectableItems[Random.Range(0, collectableItems.Length)];
         foreach (Transform child in collectables) {
-            GameObject collectable = Instantiate(collectableItems[Random.Range(0, collectableItems.Length)], child.position, Quaternion.identity) as GameObject;
+            GameObject collectable = Instantiate(itemToSpawn, child.position, Quaternion.identity) as GameObject;
+            collectable.name = itemToSpawn.name;
             collectable.transform.parent = child;
         }
     }

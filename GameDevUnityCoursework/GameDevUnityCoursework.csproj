@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Assets\ParticlesExamples\PorglezompPyroclastics\ExplosionMat.cs" />
     <Compile Include="Assets\ParticlesExamples\Sun\RotateObject.cs" />
+    <Compile Include="Assets\ScoreText.cs" />
     <Compile Include="Assets\Scripts\CameraAnimator.cs" />
     <Compile Include="Assets\Scripts\CameraMoveAroundPlayer.cs" />
     <Compile Include="Assets\Scripts\CameraOrbit.cs" />

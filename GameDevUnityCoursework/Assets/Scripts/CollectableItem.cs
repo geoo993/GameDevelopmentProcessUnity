@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CollectableItem : MonoBehaviour {
     
@@ -15,6 +16,11 @@ public class CollectableItem : MonoBehaviour {
     public enum ItemType { None, BlueCrystal, RedCrystal, GreenCrystal, Trophy, Gold, Coin };
     public ItemType itemType = ItemType.None;
 
+    [Range(1, 20)]
+    public int scoreValue;
+    //public Text scoreText;
+    private int totalCollected = 0;
+
     void Update()
     {
         transform.Rotate(0.0f, 1.0f, 0.0f);
@@ -28,6 +34,9 @@ public class CollectableItem : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.name == "HoverboardBodyBlue" || other.gameObject.name == "HoverboardBodyGreen"){
+
+			FindObjectOfType<GameManager>().SetScore(scoreValue, gameObject.name);
+            
             Destroy(gameObject);
         }
     }

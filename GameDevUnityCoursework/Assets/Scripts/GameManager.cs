@@ -1,12 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
 
+    public enum PlayerType { Blue, Green };
+    private PlayerType playerType = PlayerType.Blue;
+    
+	public GameObject bluePlayer;
+    public GameObject greenPlayer;
+
+    public Text scoreText;
+    private int scoreCount = 0;
+    
+    public static GameObject selectedButton;
+    private GameObject[] buttons;
+    
     private int difficulty = 2;
     private MusicManager musicManager;
-    public GameObject[] player;
     
 	static GameManager instance = null;
     
@@ -24,6 +36,8 @@ public class GameManager : MonoBehaviour {
 
     void Start()
     {
+        buttons = GameObject.FindGameObjectsWithTag("Button");
+        
         musicManager = FindObjectOfType<MusicManager>();
 
         if (musicManager){
@@ -36,19 +50,26 @@ public class GameManager : MonoBehaviour {
         float diff = PlayerPrefsManager.GetDifficulty();
         SetDifficulty(diff);
 
-
         int playerBody = PlayerPrefsManager.GetPlayerBody();
         SetPlayerBody(playerBody);
+
+        //SetScore(scoreCount);
     }
     
     public void SetPlayerBody(int body){
-        foreach(GameObject obj in player){
-            obj.SetActive(false);
+
+        playerType = (body == 0) ? PlayerType.Blue : PlayerType.Green;
+        
+        if (playerType == PlayerType.Blue){
+            Camera.main.GetComponent<MouseOrbit>().target = bluePlayer.transform;
+            bluePlayer.SetActive(true);
+            greenPlayer.SetActive(false);
+        }else {
+			Camera.main.GetComponent<MouseOrbit>().target = greenPlayer.transform;
+            bluePlayer.SetActive(false);
+            greenPlayer.SetActive(true);
         }
-        player[body].SetActive(true);
-        Camera.main.GetComponent<MouseOrbit>().target = player[body].transform;
     }
-    
     
     public void SetDifficulty(float diff){
         difficulty = Mathf.RoundToInt(diff);
@@ -58,5 +79,35 @@ public class GameManager : MonoBehaviour {
         return difficulty;
     }
     
+    public void SetScore(int score, string item){
+        scoreCount += score;
+        scoreText.text = scoreCount.ToString();
+        
+        
+        GameObject itemScoreText = null;
+        foreach(GameObject button in buttons){
+            if (button.name == item){
+                itemScoreText = button.transform.Find("ScoreText").gameObject;
+                break;
+            }
+        }
+
+        if (itemScoreText){
+            itemScoreText.GetComponent<ScoreText>().SetScore(score);
+        }
+    }
+    
+    
+    
+    public void OnMouseDown(GameObject tapped)
+    {
+        foreach (GameObject button in buttons){
+            button.GetComponent<Image>().color = Color.black;
+        }
+        
+        tapped.GetComponent<Image>().color = Color.white;
+        selectedButton = tapped;
+        
+    }
 
 }

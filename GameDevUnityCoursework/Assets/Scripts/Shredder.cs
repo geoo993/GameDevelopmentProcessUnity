@@ -11,11 +11,14 @@ public class Shredder : MonoBehaviour {
         }
     }
     
-    [SerializeField, Range(0.0f, 10.0f)] float forwardSpeed;
+    
+    private float forwardSpeed = 0.0f;
     
     private GameObject[] ramps;
     private GameObject[] boxes;
     private GameObject[] blocks;
+
+    private bool damagePlayer = true;
     
     void ShredRamps(){
         ramps = GameObject.FindGameObjectsWithTag("Ramp");
@@ -47,6 +50,10 @@ public class Shredder : MonoBehaviour {
         }
         
     }
+    
+    public void SetSpeed(float speed){
+        forwardSpeed = speed;
+    }
    
 	// Update is called once per frame
 	void Update () {
@@ -59,19 +66,17 @@ public class Shredder : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-		//print(collision.gameObject.name);
-        
-        /*
-        if (collision.gameObject.tag != "Wall" ||
-        collision.gameObject.tag != "Lane1" ||
-        collision.gameObject.tag != "Lane2" ||
-        collision.gameObject.tag != "Lane3" ||
-        collision.gameObject.tag != "Lane4"  
-        ){
-        
-			Destroy(collision.gameObject);
+        //print(collision.gameObject.name);
+        if (damagePlayer)
+        {
+            if (collision.gameObject.tag == "Player" || collision.gameObject.name == "HoverboardBodyBlue" || collision.gameObject.name == "HoverboardBodyGreen")
+            {
+
+                FindObjectOfType<GameManager>().SetHealth(100);
+            }
+
+            damagePlayer = false;
         }
-        */
     
     }
 

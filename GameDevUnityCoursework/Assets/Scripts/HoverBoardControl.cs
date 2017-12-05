@@ -16,18 +16,18 @@ public class HoverBoardControl : MonoBehaviour
     private float m_deadZone = 0.1f;
     
     // hovering
-	public float m_jumpForce = 100.0f;
-    public float m_hoverForce = 9.0f;
+	public float m_jumpForce = 1000.0f;
+    public float m_hoverForce = 1000.0f;
     public float m_hoverHeight = 2.0f;
     public GameObject[] m_hoverPoints;
     
     // movement
-    public float m_forwardAcl = 100.0f;
-    public float m_backwardAcl = 25.0f;
-    public float m_speedBoost = 1500.0f;
+    private float m_forwardAcl = 10000.0f;
+    private float m_backwardAcl = 2500.0f;
+    private float m_speedBoost = 1500.0f;
     private float m_currThrust = 0.0f;
     
-    public float m_turnStrength = 10f;
+    private float m_turnStrength = 600.0f;
     private float m_currTurn = 0.0f;
 
     public bool m_enableAutoMove;
@@ -38,6 +38,13 @@ public class HoverBoardControl : MonoBehaviour
     
     private int m_layerMask;
 
+    public void SetSpeed(float forwardSpeed, float backwardSpeed, float rotationSpeed){
+        m_forwardAcl = forwardSpeed;
+        m_backwardAcl = backwardSpeed;
+        m_turnStrength = rotationSpeed;
+    }
+    
+    
     void Start()
     {
         // 
@@ -94,9 +101,11 @@ public class HoverBoardControl : MonoBehaviour
     }
     */
     
+    
     void Update()
     {
         Movement();
+        CheckOutOfBounds();
     }
     
     void FixedUpdate()
@@ -249,6 +258,17 @@ public class HoverBoardControl : MonoBehaviour
             m_body.AddForce(transform.forward * m_speedBoost, ForceMode.Impulse);
         }
     }
+    
+    void CheckOutOfBounds(){
 
- 
+        if (
+            this.transform.position.x > 50.0f
+            || this.transform.position.x < -50.0f
+            || this.transform.position.y < -50.0f
+            )
+            {
+                FindObjectOfType<GameManager>().ActivateGameLose();
+            }
+    }
+    
 }

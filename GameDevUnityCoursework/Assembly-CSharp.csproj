@@ -46,6 +46,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Damage.cs" />
      <Compile Include="Assets\ParticlesExamples\PorglezompPyroclastics\ExplosionMat.cs" />
      <Compile Include="Assets\ParticlesExamples\Sun\RotateObject.cs" />
      <Compile Include="Assets\Scripts\CameraMoveAroundPlayer.cs" />
@@ -73,6 +74,7 @@
      <Compile Include="Assets\Scripts\PlayerPrefsManager.cs" />
      <Compile Include="Assets\Scripts\ScoreText.cs" />
      <Compile Include="Assets\Scripts\Shredder.cs" />
+     <Compile Include="Assets\Scripts\SplashScreen.cs" />
      <Compile Include="Assets\Scripts\Thruster.cs" />
      <None Include="Assets\ParticlesExamples\Sun\DissolveToTransparent.shader" />
      <None Include="Assets\ParticlesExamples\PorglezompPyroclastics\Explosion.shader" />

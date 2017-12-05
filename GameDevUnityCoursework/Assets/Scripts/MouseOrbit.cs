@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MouseOrbit : MonoBehaviour {
 
-    public Transform target;
+    public Transform target = null;
     public float distance = 10.0f;
 
     public float xSpeed = 250.0f;

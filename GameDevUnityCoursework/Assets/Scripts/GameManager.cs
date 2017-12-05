@@ -7,12 +7,26 @@ public class GameManager : MonoBehaviour {
 
     public enum PlayerType { Blue, Green };
     private PlayerType playerType = PlayerType.Blue;
-    
-	public GameObject bluePlayer;
+    private HoverBoardControl playerHoverBoard = null;
+
+    public LevelManager levelManager;
+    public GameObject bluePlayer;
     public GameObject greenPlayer;
+    public GameObject mainCamera;
+    public Shredder shredder;
+    public FallingObjects faller;
 
     public Text scoreText;
     private int scoreCount = 0;
+    
+    public Slider healthBar;
+    private float healthCount = 100.0f;
+    
+    private int difficulty = 2;
+    private float shredderSpeed = 0.5f;
+    private float minimumAteroidFallingTime = 0.05f;
+    private float maximumAteroidFallingTime = 2.0f;
+    private int maximumAsteroids = 100;
     
     public static GameObject selectedButton;
     private GameObject[] buttons{
@@ -21,7 +35,6 @@ public class GameManager : MonoBehaviour {
         }
     }
     
-    private int difficulty = 2;
     private MusicManager musicManager
     {
         get {
@@ -29,7 +42,8 @@ public class GameManager : MonoBehaviour {
         }
     }
     
-	static GameManager instance = null;
+    static GameManager instance = null;
+    public static bool endOfAsteroidAttack = false;
     
     // Make this game object and all its transform children
     // survive when loading a new scene.
@@ -52,25 +66,50 @@ public class GameManager : MonoBehaviour {
             Debug.LogWarning("No music manager found in this scene");
         }
 
+		int playerBody = PlayerPrefsManager.GetPlayerBody();
+		SetPlayerBody(playerBody);
+        
+        
         float diff = PlayerPrefsManager.GetDifficulty();
         SetDifficulty(diff);
 
-        int playerBody = PlayerPrefsManager.GetPlayerBody();
-        SetPlayerBody(playerBody);
-
+        EnableTrophy(false);
     }
+
+    void Update()
+    {
+        GameWin();
+        GameLose();
+    }
+
+    void CreateCamera(Transform target){
+        GameObject cam = Instantiate(mainCamera, Vector3.zero, Quaternion.identity) as GameObject;
+        cam.name = mainCamera.name;
+        cam.GetComponent<MouseOrbit>().target = target;
+    }
+    
     void CreatePlayer(PlayerType player){
 
+        GameObject newPlayer = null;
+        
         if (player == PlayerType.Blue)
         {
-            GameObject blueplayer = Instantiate(bluePlayer, bluePlayer.transform.position, bluePlayer.transform.rotation) as GameObject;
-            //Camera.main.GetComponent<MouseOrbit>().target = blueplayer.transform;
+            newPlayer = Instantiate(bluePlayer, bluePlayer.transform.position, bluePlayer.transform.rotation) as GameObject;
+            newPlayer.name = bluePlayer.name;
         }
         
-        if (player == PlayerType.Green){
-            GameObject greenplayer = Instantiate(greenPlayer, greenPlayer.transform.position, greenPlayer.transform.rotation) as GameObject;
-            //Camera.main.GetComponent<MouseOrbit>().target = greenplayer.transform;
+        if (player == PlayerType.Green)
+        {
+            newPlayer = Instantiate(greenPlayer, greenPlayer.transform.position, greenPlayer.transform.rotation) as GameObject;
+            newPlayer.name = greenPlayer.name;
         }
+
+        if (newPlayer)
+        {
+            playerHoverBoard = newPlayer.GetComponent<HoverBoardControl>();
+            CreateCamera(newPlayer.transform);
+        }
+       
     }
     
     public void SetPlayerBody(int body){
@@ -81,19 +120,24 @@ public class GameManager : MonoBehaviour {
     
     public void SetDifficulty(float diff){
         difficulty = Mathf.RoundToInt(diff);
-        
-        // set asteroid falling amount
-        // set max player speed
-        // set road speed
+
         if (difficulty == 1){
-        
+            shredder.SetSpeed(0.3f); // move slow
+            faller.SetTimers(0.1f, 3.0f, 250); // fall in average speed rate and less fallers
+            playerHoverBoard.SetSpeed(4000, 1500, 300); // player moves slow
         }else if (difficulty == 2){
-        
+            shredder.SetSpeed(0.5f); // move average
+            faller.SetTimers(0.05f, 2.0f, 400); // fall in average speed rate and average fallers
+            playerHoverBoard.SetSpeed(6000, 2000, 450); // player moves average
         }else if (difficulty == 3){
-        
+            shredder.SetSpeed(0.8f); // move fast
+            faller.SetTimers(0.01f, 1.0f, 600); // fall in fast speed rate and lots of fallers
+            playerHoverBoard.SetSpeed(10000, 2500, 600); // player moves fast
         }else {
-        
+            return;
         }
+
+        endOfAsteroidAttack = false;
     }
     
     public int GetCurrentDifficulty(){
@@ -103,7 +147,6 @@ public class GameManager : MonoBehaviour {
     public void SetScore(int score, string item){
         scoreCount += score;
         scoreText.text = scoreCount.ToString();
-        
         
         GameObject itemScoreText = null;
         foreach(GameObject button in buttons){
@@ -118,17 +161,65 @@ public class GameManager : MonoBehaviour {
         }
     }
     
+	public void OnMouseDown(GameObject tapped)
+	{
+		if (tapped.name == "Trophy")
+		{
+			return;
+		}
+		
+		foreach (GameObject button in buttons){
+			button.GetComponent<Image>().color = Color.black;
+		}
+		
+		tapped.GetComponent<Image>().color = Color.white;
+		selectedButton = tapped;
+		
+	}
     
-    
-    public void OnMouseDown(GameObject tapped)
-    {
-        foreach (GameObject button in buttons){
-            button.GetComponent<Image>().color = Color.black;
-        }
+    public void SetHealth(float health){
+        healthCount -= health;
+        healthBar.value = healthCount;
         
-        tapped.GetComponent<Image>().color = Color.white;
-        selectedButton = tapped;
-        
+        print(healthCount);
     }
+    
+    public void EnableTrophy(bool enable){
+        foreach(GameObject button in buttons){
+            if (button.name == "Trophy"){
+                button.GetComponent<Image>().color = enable ? Color.white : Color.black;
+                break;
+            }
+        }
+    }
+    
+    void GameWin(){
 
+        if (endOfAsteroidAttack)
+        {
+            EnableTrophy(true);
+            
+            ActivateGameWin();
+            // show big trophy in middle of the screen and show final score
+            // load game win screen
+        }
+    }
+    
+    void GameLose(){
+    
+        if (healthCount <= 0){
+            // load game lose screen
+            ActivateGameLose();
+        }
+    }
+    
+    public void ActivateGameWin(){
+        print("You Win");
+    }
+    
+    
+    public void ActivateGameLose(){
+        levelManager.LoadLevel("Lose");
+    }
+    
 }

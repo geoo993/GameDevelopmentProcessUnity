@@ -18,7 +18,6 @@ public class CollectableItem : MonoBehaviour {
 
     [Range(1, 20)]
     public int scoreValue;
-    //public Text scoreText;
     private int totalCollected = 0;
 
     void Update()

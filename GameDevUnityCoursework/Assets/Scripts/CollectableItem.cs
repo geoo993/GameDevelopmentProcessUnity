@@ -15,9 +15,15 @@ public class CollectableItem : MonoBehaviour {
 
     public enum ItemType { None, BlueCrystal, RedCrystal, GreenCrystal, Trophy, Gold, Coin };
     public ItemType itemType = ItemType.None;
+    
+    public enum CollectionType { Points, Collectable };
+    public CollectionType collectionType = CollectionType.Points;
 
     [Range(1, 20)]
     public int scoreValue;
+
+    private int collectionValue = 1;
+    
     private int totalCollected = 0;
 
     void Update()
@@ -34,7 +40,16 @@ public class CollectableItem : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player" || other.gameObject.name == "HoverboardBodyBlue" || other.gameObject.name == "HoverboardBodyGreen"){
 
-			FindObjectOfType<GameManager>().SetScore(scoreValue, gameObject.name);
+            switch (collectionType) {
+            case CollectionType.Points: 
+                FindObjectOfType<GameManager>().SetScore(scoreValue, gameObject.name);
+                    break;
+            case CollectionType.Collectable:
+                FindObjectOfType<GameManager>().SetCrystalsCollected(collectionValue, gameObject.name);
+                    break;
+            default:
+                    break;
+           }
             
             Destroy(gameObject);
         }

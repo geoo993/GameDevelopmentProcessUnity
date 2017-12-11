@@ -15,7 +15,11 @@ public class GameManager : MonoBehaviour {
     public GameObject mainCamera;
     public Shredder shredder;
     public FallingObjects faller;
-
+    
+    public Text crystalsText;
+    private int crystalsCount = 0;
+    private int crystalsMaxCount = 50;
+    
     public Text scoreText;
     private int scoreCount = 0;
     
@@ -119,25 +123,38 @@ public class GameManager : MonoBehaviour {
     }
     
     public void SetDifficulty(float diff){
+        
         difficulty = Mathf.RoundToInt(diff);
 
-        if (difficulty == 1){
-            shredder.SetSpeed(0.3f); // move slow
-            faller.SetTimers(0.1f, 3.0f, 250); // fall in average speed rate and less fallers
-            playerHoverBoard.SetSpeed(4000, 1500, 300); // player moves slow
+        if (difficulty <= 1){
+            EasyDifficulty();
         }else if (difficulty == 2){
-            shredder.SetSpeed(0.5f); // move average
-            faller.SetTimers(0.05f, 2.0f, 400); // fall in average speed rate and average fallers
-            playerHoverBoard.SetSpeed(6000, 2000, 450); // player moves average
+            NormalDifficulty();
         }else if (difficulty == 3){
-            shredder.SetSpeed(0.8f); // move fast
-            faller.SetTimers(0.01f, 1.0f, 600); // fall in fast speed rate and lots of fallers
-            playerHoverBoard.SetSpeed(10000, 2500, 600); // player moves fast
+            HardDifficulty();
         }else {
             return;
         }
 
         endOfAsteroidAttack = false;
+    }
+    
+    private void EasyDifficulty(){
+		shredder.SetSpeed(0.3f); // move slow
+		faller.SetTimers(0.1f, 3.0f, 250); // fall in average speed rate and less fallers
+		playerHoverBoard.SetSpeed(4000, 1500, 300); // player moves slow  
+    }
+    
+    private void NormalDifficulty(){
+		shredder.SetSpeed(0.5f); // move average
+		faller.SetTimers(0.05f, 2.0f, 400); // fall in average speed rate and average fallers
+		playerHoverBoard.SetSpeed(6000, 2000, 450); // player moves average
+    }
+    
+    private void HardDifficulty(){
+        shredder.SetSpeed(0.8f); // move fast
+        faller.SetTimers(0.01f, 1.0f, 600); // fall in fast speed rate and lots of fallers
+        playerHoverBoard.SetSpeed(10000, 2500, 600); // player moves fast
     }
     
     public int GetCurrentDifficulty(){
@@ -148,6 +165,7 @@ public class GameManager : MonoBehaviour {
         scoreCount += score;
         scoreText.text = scoreCount.ToString();
         
+        /*
         GameObject itemScoreText = null;
         foreach(GameObject button in buttons){
             if (button.name == item){
@@ -159,10 +177,32 @@ public class GameManager : MonoBehaviour {
         if (itemScoreText){
             itemScoreText.GetComponent<ScoreText>().SetScore(score);
         }
+        */
     }
+    
+    public void SetCrystalsCollected(int collected, string item){
+        crystalsCount += collected;
+        crystalsText.text = crystalsCount.ToString() + " / " + crystalsMaxCount.ToString();
+        
+        /*
+        GameObject crystalsCollectedText = null;
+        foreach(GameObject button in buttons){
+            if (button.name == item){
+                crystalsCollectedText = button.transform.Find("CrystalsText").gameObject;
+                break;
+            }
+        }
+
+        if (crystalsCollectedText){
+            crystalsCollectedText.GetComponent<CrystalsCollection>().SetCrystalsCollected(collected);
+        }
+        */
+    }
+    
     
 	public void OnMouseDown(GameObject tapped)
 	{
+        /*
 		if (tapped.name == "Trophy")
 		{
 			return;
@@ -174,7 +214,7 @@ public class GameManager : MonoBehaviour {
 		
 		tapped.GetComponent<Image>().color = Color.white;
 		selectedButton = tapped;
-		
+		*/
 	}
     
     public void SetHealth(float health){

@@ -57,7 +57,8 @@ public class Shredder : MonoBehaviour {
    
 	// Update is called once per frame
 	void Update () {
-        transform.Translate(new Vector3(0.0f, 0.0f, forwardSpeed));
+    
+        transform.Translate(0.0f, 0.0f, forwardSpeed);
 
         ShredRamps();
         ShredBoxes();

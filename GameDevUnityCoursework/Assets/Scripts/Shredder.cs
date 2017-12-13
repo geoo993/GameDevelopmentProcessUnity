@@ -43,7 +43,8 @@ public class Shredder : MonoBehaviour {
         Vector3 size = boxCollider.bounds.size;
         blocks = GameObject.FindGameObjectsWithTag("Block");
         foreach (GameObject block in blocks){
-			float boundary = block.transform.position.z + size.z;
+            float offset = (size.z + size.z) * 0.75f;
+			float boundary = block.transform.position.z + offset;
             if (transform.position.z > boundary){
                 Destroy(block);
             }
@@ -60,8 +61,8 @@ public class Shredder : MonoBehaviour {
     
         transform.Translate(0.0f, 0.0f, forwardSpeed);
 
-        ShredRamps();
-        ShredBoxes();
+        //ShredRamps();
+        //ShredBoxes();
         ShredBlocks();
     }
 
@@ -73,7 +74,7 @@ public class Shredder : MonoBehaviour {
             if (collision.gameObject.tag == "Player" || collision.gameObject.name == "HoverboardBodyBlue" || collision.gameObject.name == "HoverboardBodyGreen")
             {
 
-                FindObjectOfType<GameManager>().SetHealth(100);
+                FindObjectOfType<GameManager>().SetHealth(100.0f, false);
             }
 
             damagePlayer = false;

@@ -216,12 +216,10 @@ public class GameManager : MonoBehaviour {
 		selectedButton = tapped;
 		*/
 	}
-    
-    public void SetHealth(float health){
-        healthCount -= health;
+   
+    public void SetHealth(float health, bool shouldIncrease){
+        healthCount -= shouldIncrease ? healthCount + health : healthCount - health;
         healthBar.value = healthCount;
-        
-        print(healthCount);
     }
     
     public void EnableTrophy(bool enable){

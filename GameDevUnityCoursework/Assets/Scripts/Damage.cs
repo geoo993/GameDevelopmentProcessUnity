@@ -15,12 +15,11 @@ public class Damage : MonoBehaviour {
 
             if (damagePlayer)
             {
-                print("Player Hit With damage " + damageToPlayer);
-                FindObjectOfType<GameManager>().SetHealth(damageToPlayer);
-                //Destroy(gameObject);
+                FindObjectOfType<GameManager>().SetHealth(damageToPlayer, false);
                 damagePlayer = false;
             }
         }
+        
     }
     
 }

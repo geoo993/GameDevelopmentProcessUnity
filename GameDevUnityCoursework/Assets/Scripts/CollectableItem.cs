@@ -13,17 +13,14 @@ public class CollectableItem : MonoBehaviour {
         }
     }
 
-    public enum ItemType { None, BlueCrystal, RedCrystal, GreenCrystal, Trophy, Gold, Coin };
+    public enum ItemType { None, BlueCrystal, RedCrystal, GreenCrystal, Trophy, Gold, Coin, CandyBar };
     public ItemType itemType = ItemType.None;
     
-    public enum CollectionType { Points, Collectable };
+    public enum CollectionType { Points, Collectable, Health };
     public CollectionType collectionType = CollectionType.Points;
 
     [Range(1, 20)]
-    public int scoreValue;
-
-    private int collectionValue = 1;
-    
+    public int value;
     private int totalCollected = 0;
 
     void Update()
@@ -42,10 +39,13 @@ public class CollectableItem : MonoBehaviour {
 
             switch (collectionType) {
             case CollectionType.Points: 
-                FindObjectOfType<GameManager>().SetScore(scoreValue, gameObject.name);
+                FindObjectOfType<GameManager>().SetScore(value, gameObject.name);
                     break;
             case CollectionType.Collectable:
-                FindObjectOfType<GameManager>().SetCrystalsCollected(collectionValue, gameObject.name);
+                FindObjectOfType<GameManager>().SetCrystalsCollected(value, gameObject.name);
+                    break;
+            case CollectionType.Health:
+                FindObjectOfType<GameManager>().SetHealth(value, true);
                     break;
             default:
                     break;

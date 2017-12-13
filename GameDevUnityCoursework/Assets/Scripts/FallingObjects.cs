@@ -10,7 +10,7 @@ public class FallingObjects : MonoBehaviour {
     private float minTime = 5f; 
     private float maxTime = 10f;
 	private int count = 200;
-    private float horizontalBounds = 50f;
+    private float horizontalBounds = 30f;
     
     public GameObject[] fallers;
     

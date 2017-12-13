@@ -1,14 +1,10 @@
-﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
+﻿<Properties StartupConfiguration="{63805BC9-E358-B77C-AD88-DD14F3140F84}|Unit Tests">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CollectableItem.cs">
     <Files>
       <File FileName="Assets/Scripts/HoverBoardControl.cs" Line="108" Column="28" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="178" Column="43" />
-      <File FileName="Assets/Scripts/Shredder.cs" Line="54" Column="39" />
-      <File FileName="Assets/Scripts/OptionsController.cs" Line="54" Column="64" />
-      <File FileName="Assets/Scripts/PlayerPrefsManager.cs" Line="6" Column="14" />
-      <File FileName="Assets/Scripts/ScoreText.cs" Line="8" Column="5" />
-      <File FileName="Assets/Scripts/CrystalsCollection.cs" Line="13" Column="50" />
-      <File FileName="Assets/Scripts/CollectableItem.cs" Line="51" Column="27" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="220" Column="26" />
+      <File FileName="Assets/Scripts/CollectableItem.cs" Line="49" Column="27" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

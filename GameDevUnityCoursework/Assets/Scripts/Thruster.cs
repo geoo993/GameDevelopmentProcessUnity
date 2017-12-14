@@ -10,8 +10,6 @@ public class Thruster : MonoBehaviour {
 
     private bool IsJump = true;
     private float distanceFromGroundCurve = 0.0f;
-    private float jumpHeight = 10.0f;
-    private float jumpStrength = 10.0f;
     
     private GameObject parent {
         get{

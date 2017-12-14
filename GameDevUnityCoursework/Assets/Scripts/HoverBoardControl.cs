@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 // https://www.youtube.com/watch?v=5B6ALcOX4b8
 
@@ -12,7 +13,10 @@ public class HoverBoardControl : MonoBehaviour
           return GetComponent<Rigidbody>();
       }
     }
-  
+    
+    [HideInInspector]
+    public GameManager gameManager;
+    
     private float m_deadZone = 0.1f;
     
     // hovering
@@ -20,11 +24,19 @@ public class HoverBoardControl : MonoBehaviour
     public float m_hoverForce = 1000.0f;
     public float m_hoverHeight = 2.0f;
     public GameObject[] m_hoverPoints;
+
+    private float m_speedBoosterTimer = 0.0f;
+    private float m_speedBoosterSpeed = 0.0f;
+    private bool m_startSpeedBoosterTimer = false;
+
+    private float m_shieldBoosterAmount = 0.0f;
+    private float m_shieldBoosterTimer = 0.0f;
+    private bool m_startShieldBoosterTimer = false;
     
     // movement
+    private float m_originalAcl = 10000.0f;
     private float m_forwardAcl = 10000.0f;
     private float m_backwardAcl = 2500.0f;
-    private float m_speedBoost = 1500.0f;
     private float m_currThrust = 0.0f;
     
     private float m_turnStrength = 600.0f;
@@ -37,9 +49,11 @@ public class HoverBoardControl : MonoBehaviour
     private bool isJumping;
     
     private int m_layerMask;
+    private float originalMass = 0.0f;
 
     public void SetSpeed(float forwardSpeed, float backwardSpeed, float rotationSpeed){
-        m_forwardAcl = forwardSpeed;
+        m_originalAcl = forwardSpeed;
+        m_forwardAcl = m_originalAcl;
         m_backwardAcl = backwardSpeed;
         m_turnStrength = rotationSpeed;
     }
@@ -70,6 +84,7 @@ public class HoverBoardControl : MonoBehaviour
           
         m_layerMask = 1 << LayerMask.NameToLayer("HoverCar"); // name of the layer
         m_layerMask = ~m_layerMask;
+        originalMass = m_body.mass;
 
     }
 
@@ -106,12 +121,13 @@ public class HoverBoardControl : MonoBehaviour
     {
         Movement();
         CheckOutOfBounds();
+        SpeedBoosterAnimation();
+        ShieldBoosterAnimation();
     }
     
     void FixedUpdate()
     {
         ApplyTrust();
-		ApplySpeedBoost();
         
         //  Hover Force
         RaycastHit hit;
@@ -152,6 +168,15 @@ public class HoverBoardControl : MonoBehaviour
                 else
                 {
                     ApplyForceLift(hoverPoint, -m_hoverForce);
+                }
+                
+                if (transform.position.y > 50.0f)
+                {
+                    m_body.mass = 1000.0f;
+                }
+                else
+                {
+                    m_body.mass = originalMass;
                 }
 
                 isGrounded = false;
@@ -253,11 +278,67 @@ public class HoverBoardControl : MonoBehaviour
 
     }
     
-    void ApplySpeedBoost(){
-        if (Input.GetKeyDown(KeyCode.Z)){
-            m_body.AddForce(transform.forward * m_speedBoost, ForceMode.Impulse);
+	
+    private void SpeedBoosterAnimation() {
+
+        if (m_startSpeedBoosterTimer)
+        {
+            m_speedBoosterTimer -= Time.deltaTime;
+            m_forwardAcl = m_originalAcl + m_speedBoosterSpeed;
+            
+            if (m_speedBoosterTimer < 0.0f)
+            {
+                m_forwardAcl = m_originalAcl;
+                m_speedBoosterSpeed = 0.0f;
+                m_speedBoosterTimer = 0.0f;
+                m_startSpeedBoosterTimer = false;
+                gameManager.SetSpeedBoosterGUI(false);
+            }
         }
+
+        if (gameManager)
+        {
+            gameManager.SetSpeedBoosterBar(m_speedBoosterTimer);
+            
+        }
+        
     }
+    
+    private void ShieldBoosterAnimation() {
+
+        if (m_startShieldBoosterTimer && gameManager)
+        {
+            m_shieldBoosterTimer -= Time.deltaTime;
+            
+            // change shield with  m_shieldBoosterAmount
+            if (m_shieldBoosterTimer < 0.0f)
+            {
+                m_shieldBoosterAmount = 0.0f;
+                m_speedBoosterTimer = 0.0f;
+                m_startShieldBoosterTimer = false;
+                gameManager.SetShieldBoosterGUI(false);
+            }
+        }
+
+        if (gameManager)
+        {
+            gameManager.SetShieldBoosterBar(m_shieldBoosterTimer);
+        }
+        
+    }
+    
+    public void ApplySpeedBooster( float speedBoost, float timer, bool startBooster){
+        m_speedBoosterSpeed = speedBoost;
+        m_startSpeedBoosterTimer = startBooster;
+        m_speedBoosterTimer = timer;
+    }
+    
+    public void ApplyShieldBooster( float shieldBoost, float timer, bool shieldBooster){
+        m_shieldBoosterAmount = shieldBoost;
+        m_startShieldBoosterTimer = shieldBooster;
+        m_shieldBoosterTimer = timer;
+    }
+    
     
     void CheckOutOfBounds(){
 

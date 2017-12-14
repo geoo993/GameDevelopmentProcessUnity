@@ -5,6 +5,7 @@ using UnityEngine;
 public class Damage : MonoBehaviour {
 
     public float damageToPlayer;
+    public bool autoDestroy = true;
 
     private bool damagePlayer = true;
     
@@ -16,6 +17,11 @@ public class Damage : MonoBehaviour {
             if (damagePlayer)
             {
                 FindObjectOfType<GameManager>().SetHealth(damageToPlayer, false);
+                
+                if (autoDestroy){
+                    Destroy(gameObject);
+                }
+                
                 damagePlayer = false;
             }
         }

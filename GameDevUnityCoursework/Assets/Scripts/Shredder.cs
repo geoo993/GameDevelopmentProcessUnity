@@ -58,12 +58,16 @@ public class Shredder : MonoBehaviour {
    
 	// Update is called once per frame
 	void Update () {
-    
-        transform.Translate(0.0f, 0.0f, forwardSpeed);
 
-        //ShredRamps();
-        //ShredBoxes();
-        ShredBlocks();
+        if (GameManager.endOfAsteroidAttack == false)
+        {
+            transform.Translate(0.0f, 0.0f, forwardSpeed);
+			
+            //ShredBoxes();
+			//ShredRamps();
+            ShredBlocks();
+        }
+
     }
 
     void OnCollisionEnter(Collision collision)

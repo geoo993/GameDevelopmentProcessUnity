@@ -25,12 +25,18 @@ public class GameManager : MonoBehaviour {
     
     public Slider healthBar;
     private float healthCount = 100.0f;
+
+    public GameObject candyBarGUI = null;
+    
+    public Slider speedBoosterBar = null;
+    public GameObject speedBoosterGUI = null;
+    
+    public Slider shieldBoosterBar = null;
+	public GameObject shieldBoosterGUI = null;
+    
+    public GameObject trophy;
     
     private int difficulty = 2;
-    private float shredderSpeed = 0.5f;
-    private float minimumAteroidFallingTime = 0.05f;
-    private float maximumAteroidFallingTime = 2.0f;
-    private int maximumAsteroids = 100;
     
     public static GameObject selectedButton;
     private GameObject[] buttons{
@@ -69,6 +75,10 @@ public class GameManager : MonoBehaviour {
         }else{
             Debug.LogWarning("No music manager found in this scene");
         }
+        
+        if (playerHoverBoard){
+            playerHoverBoard.gameManager = GetComponent<GameManager>();
+        }
 
 		int playerBody = PlayerPrefsManager.GetPlayerBody();
 		SetPlayerBody(playerBody);
@@ -77,12 +87,13 @@ public class GameManager : MonoBehaviour {
         float diff = PlayerPrefsManager.GetDifficulty();
         SetDifficulty(diff);
 
-        EnableTrophy(false);
+        DisableCollectableGUIs();
+        candyBarGUI.SetActive(true);
+
     }
 
     void Update()
     {
-        GameWin();
         GameLose();
     }
 
@@ -95,6 +106,9 @@ public class GameManager : MonoBehaviour {
     void CreatePlayer(PlayerType player){
 
         GameObject newPlayer = null;
+
+        string deactivePlayerGUI = (player == PlayerType.Green) ? "BluePlayerGUI" : "GreenPlayerGUI";
+        GameObject.FindGameObjectWithTag(deactivePlayerGUI).SetActive(false);
         
         if (player == PlayerType.Blue)
         {
@@ -140,21 +154,21 @@ public class GameManager : MonoBehaviour {
     }
     
     private void EasyDifficulty(){
-		shredder.SetSpeed(0.3f); // move slow
-		faller.SetTimers(0.1f, 3.0f, 250); // fall in average speed rate and less fallers
+		shredder.SetSpeed(0.2f); // move slow
+		faller.SetTimers(0.1f, 2.0f); // fall in average speed rate and less fallers
 		playerHoverBoard.SetSpeed(4000, 1500, 300); // player moves slow  
     }
     
     private void NormalDifficulty(){
-		shredder.SetSpeed(0.5f); // move average
-		faller.SetTimers(0.05f, 2.0f, 400); // fall in average speed rate and average fallers
-		playerHoverBoard.SetSpeed(6000, 2000, 450); // player moves average
+		shredder.SetSpeed(0.4f); // move average
+		faller.SetTimers(0.05f, 1.5f); // fall in average speed rate and average fallers
+		playerHoverBoard.SetSpeed(6000, 2000, 500); // player moves average
     }
     
     private void HardDifficulty(){
-        shredder.SetSpeed(0.8f); // move fast
-        faller.SetTimers(0.01f, 1.0f, 600); // fall in fast speed rate and lots of fallers
-        playerHoverBoard.SetSpeed(10000, 2500, 600); // player moves fast
+        shredder.SetSpeed(0.6f); // move fast
+        faller.SetTimers(0.01f, 1.0f); // fall in fast speed rate and lots of fallers
+        playerHoverBoard.SetSpeed(10000, 2500, 700); // player moves fast
     }
     
     public int GetCurrentDifficulty(){
@@ -181,8 +195,15 @@ public class GameManager : MonoBehaviour {
     }
     
     public void SetCrystalsCollected(int collected, string item){
-        crystalsCount += collected;
+		crystalsCount += collected;
+        
+        if (crystalsCount >= crystalsMaxCount) {
+            crystalsCount = crystalsMaxCount;
+            endOfAsteroidAttack = true;
+        }
+        
         crystalsText.text = crystalsCount.ToString() + " / " + crystalsMaxCount.ToString();
+        
         
         /*
         GameObject crystalsCollectedText = null;
@@ -218,29 +239,90 @@ public class GameManager : MonoBehaviour {
 	}
    
     public void SetHealth(float health, bool shouldIncrease){
-        healthCount -= shouldIncrease ? healthCount + health : healthCount - health;
+
+        healthCount = shouldIncrease ? (healthCount + health) : (healthCount - health);
+        
+        if (healthCount > 100.0f) { healthCount = 100.0f; }
         healthBar.value = healthCount;
     }
     
-    public void EnableTrophy(bool enable){
-        foreach(GameObject button in buttons){
-            if (button.name == "Trophy"){
-                button.GetComponent<Image>().color = enable ? Color.white : Color.black;
-                break;
-            }
+    
+    public void SetSpeedBooster(float speed, float timer){
+        if (playerHoverBoard.gameManager == null){
+			playerHoverBoard.gameManager = GetComponent<GameManager>();
         }
+        if (playerHoverBoard) {
+            playerHoverBoard.ApplySpeedBooster(speed, timer, true);
+            SetSpeedBoosterGUI(true);
+        }
+        if (speedBoosterBar){
+			speedBoosterBar.maxValue = timer;
+        }
+    }
+    public void SetSpeedBoosterGUI(bool active){
+        speedBoosterGUI.SetActive(active);
+        candyBarGUI.SetActive(!active);
+        
+        if (active)
+        {
+            shieldBoosterGUI.SetActive(false);
+        }
+    }
+    public void SetSpeedBoosterBar(float value){
+        if (speedBoosterBar){
+            speedBoosterBar.value = value;
+        }
+    }
+
+    public void SetShieldBooster(float shield, float timer){
+        if (playerHoverBoard.gameManager == null){
+            playerHoverBoard.gameManager = GetComponent<GameManager>();
+        }
+        if (playerHoverBoard) {
+            playerHoverBoard.ApplyShieldBooster(shield, timer, true);
+            SetShieldBoosterGUI(true);
+        }
+        if (shieldBoosterBar){
+            shieldBoosterBar.maxValue = timer;
+        }
+    }
+    public void SetShieldBoosterGUI(bool active){
+         shieldBoosterGUI.SetActive(active);
+         candyBarGUI.SetActive(!active);
+         
+         if (active)
+         {
+            speedBoosterGUI.SetActive(false);
+         }
+    }
+    public void SetShieldBoosterBar(float value){
+        if (shieldBoosterBar){
+            shieldBoosterBar.value = value;
+        }
+    }
+    
+    
+    public void SetBonus(int point, string item){
+        DisableCollectableGUIs();
+        trophy.SetActive(true);
+        SetScore(point, item);
+        GameWin();
+    }
+    
+    void DisableCollectableGUIs() {
+        trophy.SetActive(false);
+        shieldBoosterGUI.SetActive(false);
+        candyBarGUI.SetActive(false);
+        speedBoosterGUI.SetActive(false);
     }
     
     void GameWin(){
 
         if (endOfAsteroidAttack)
         {
-            EnableTrophy(true);
-            
-            ActivateGameWin();
-            // show big trophy in middle of the screen and show final score
-            // load game win screen
+             Invoke("ActivateGameWin", 5); // inseconds
         }
+        
     }
     
     void GameLose(){
@@ -252,7 +334,7 @@ public class GameManager : MonoBehaviour {
     }
     
     public void ActivateGameWin(){
-        print("You Win");
+        levelManager.LoadLevel("Win");
     }
     
     

@@ -1,10 +1,13 @@
 ﻿<Properties StartupConfiguration="{63805BC9-E358-B77C-AD88-DD14F3140F84}|Unit Tests">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/CollectableItem.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/HoverBoardControl.cs" Line="108" Column="28" />
-      <File FileName="Assets/Scripts/GameManager.cs" Line="220" Column="26" />
-      <File FileName="Assets/Scripts/CollectableItem.cs" Line="49" Column="27" />
+      <File FileName="Assets/Scripts/HoverBoardControl.cs" Line="54" Column="17" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="158" Column="33" />
+      <File FileName="Assets/Scripts/CollectableItem.cs" Line="51" Column="63" />
+      <File FileName="Assets/Scripts/GenerateBlock.cs" Line="27" Column="58" />
+      <File FileName="Assets/Scripts/Damage.cs" Line="30" Column="5" />
+      <File FileName="Assets/Scripts/FallingObjects.cs" Line="19" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

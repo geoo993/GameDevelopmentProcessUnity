@@ -12,10 +12,11 @@ public class PlayerController : MonoBehaviour {
     public bool autoMove = true;
     private Vector3 moveDirection;
 
-    private Rigidbody rigidBody;
- 
-    void Start(){
-        rigidBody = this.GetComponent<Rigidbody>();
+    private Rigidbody rigidBody {
+        get
+        {
+            return GetComponent<Rigidbody>();
+        }
     }
     
     void Update () {

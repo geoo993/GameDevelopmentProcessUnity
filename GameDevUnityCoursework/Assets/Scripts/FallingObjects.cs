@@ -9,17 +9,15 @@ public class FallingObjects : MonoBehaviour {
 
     private float minTime = 5f; 
     private float maxTime = 10f;
-	private int count = 200;
     private float horizontalBounds = 30f;
     
     public GameObject[] fallers;
     
     public bool doSpawn = true;
     
-	public void SetTimers(float min, float max, int maxFallers){
+	public void SetTimers(float min, float max){
 		minTime = min;
 		maxTime = max;
-		count = maxFallers;
 		
 		StartFallingAsteroids();
 	}
@@ -33,16 +31,11 @@ public class FallingObjects : MonoBehaviour {
        
         do
         {
-			FallOnGround();
-			count--;
-            
-            if (count <= 0){
-                print("All asteroids have fallen");
-                GameManager.endOfAsteroidAttack = true;
-            }
+            FallOnGround();
+              
 			yield return new WaitForSeconds(Random.Range(minTime, maxTime));
             
-        }while(doSpawn && count > 0);
+        }while(doSpawn && GameManager.endOfAsteroidAttack == false);
      }
     
     void FallOnGround(){

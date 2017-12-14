@@ -13,24 +13,18 @@ public class CollectableItem : MonoBehaviour {
         }
     }
 
-    public enum ItemType { None, BlueCrystal, RedCrystal, GreenCrystal, Trophy, Gold, Coin, CandyBar };
+    public enum ItemType { None, BlueCrystal, RedCrystal, GreenCrystal, Trophy, Gold, Coin, CandyBar, ShieldBooster, SpeedBooster };
     public ItemType itemType = ItemType.None;
     
-    public enum CollectionType { Points, Collectable, Health };
+    public enum CollectionType { Points, Collectable, Health, Speed, Shield, Bonus };
     public CollectionType collectionType = CollectionType.Points;
 
-    [Range(1, 20)]
+    [Range(1, 5000)]
     public int value;
-    private int totalCollected = 0;
 
     void Update()
     {
         transform.Rotate(0.0f, 1.0f, 0.0f);
-    }
-    
-    void OnCollisionEnter(Collision collision)
-    {
-        
     }
 
     void OnTriggerEnter(Collider other)
@@ -47,8 +41,16 @@ public class CollectableItem : MonoBehaviour {
             case CollectionType.Health:
                 FindObjectOfType<GameManager>().SetHealth(value, true);
                     break;
-            default:
+            case CollectionType.Speed:
+                FindObjectOfType<GameManager>().SetSpeedBooster(value, 10.0f);
                     break;
+            case CollectionType.Shield:
+                FindObjectOfType<GameManager>().SetShieldBooster(value, 10.0f);
+                    break;
+            case CollectionType.Bonus:
+                FindObjectOfType<GameManager>().SetBonus(value, gameObject.name);
+                    break;
+                    
            }
             
             Destroy(gameObject);

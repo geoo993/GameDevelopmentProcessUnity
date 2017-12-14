@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour {
     public LevelManager levelManager;
     public GameObject bluePlayer;
     public GameObject greenPlayer;
-    public GameObject mainCamera;
     public Shredder shredder;
     public FallingObjects faller;
     
@@ -25,7 +24,7 @@ public class GameManager : MonoBehaviour {
     
     public Slider healthBar;
     private float healthCount = 100.0f;
-
+    
     public GameObject candyBarGUI = null;
     
     public Slider speedBoosterBar = null;
@@ -33,9 +32,11 @@ public class GameManager : MonoBehaviour {
     
     public Slider shieldBoosterBar = null;
 	public GameObject shieldBoosterGUI = null;
-    public bool useShield = false;
+    
+    [HideInInspector] public  bool useShield = false;
     
     public GameObject trophy;
+    public Text collectableItemText = null;
     
     private int difficulty = 2;
     
@@ -53,12 +54,13 @@ public class GameManager : MonoBehaviour {
         }
     }
     
-    static GameManager instance = null;
+    //static GameManager instance = null;
     public static bool endOfAsteroidAttack = false;
     
     // Make this game object and all its transform children
     // survive when loading a new scene.
     void Awake () {
+        /*
         if (instance != null){
             Destroy(gameObject);
             Debug.Log("Duplicate MusicPlayer self-destructed");
@@ -66,10 +68,13 @@ public class GameManager : MonoBehaviour {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
+        */
     }
 
     void Start()
     {
+        endOfAsteroidAttack = false;
+        
         if (musicManager){
             float volume = PlayerPrefsManager.GetMasterVolume();
             musicManager.SetVolume(volume);
@@ -89,8 +94,8 @@ public class GameManager : MonoBehaviour {
         SetDifficulty(diff);
 
         DisableCollectableGUIs();
-        candyBarGUI.SetActive(true);
-
+        SetCandyBar(true);
+        
     }
 
     void Update()
@@ -99,8 +104,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void CreateCamera(Transform target){
-        GameObject cam = Instantiate(mainCamera, Vector3.zero, Quaternion.identity) as GameObject;
-        cam.name = mainCamera.name;
+        GameObject cam = GameObject.FindGameObjectWithTag("GameCamera");
         cam.GetComponent<MouseOrbit>().target = target;
     }
     
@@ -247,13 +251,23 @@ public class GameManager : MonoBehaviour {
         healthBar.value = healthCount;
     }
     
+    public void SetCandyBar(bool active){
+        candyBarGUI.GetComponent<Image>().enabled = active;
+        if (active)
+        {
+            collectableItemText.text = "Health";
+        }
+        
+    }
     
-    public void SetSpeedBooster(float speed, float timer){
+    
+    public void SetSpeedBooster(float speed, float timer, string item){
         if (playerHoverBoard.gameManager == null){
 			playerHoverBoard.gameManager = GetComponent<GameManager>();
         }
         if (playerHoverBoard) {
             playerHoverBoard.ApplySpeedBooster(speed, timer, true);
+            SetScore((int)(speed), item);
             SetSpeedBoosterGUI(true);
         }
         if (speedBoosterBar){
@@ -261,12 +275,14 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void SetSpeedBoosterGUI(bool active){
-        speedBoosterGUI.SetActive(active);
-        candyBarGUI.SetActive(!active);
+        speedBoosterGUI.GetComponent<Image>().enabled = active;
+        
+        SetCandyBar(!active);
         
         if (active)
         {
-            shieldBoosterGUI.SetActive(false);
+            shieldBoosterGUI.GetComponent<Image>().enabled = false;
+            collectableItemText.text = "Speed";
         }
     }
     public void SetSpeedBoosterBar(float value){
@@ -275,12 +291,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public void SetShieldBooster(float shield, float timer){
+    public void SetShieldBooster(float shield, float timer, string item){
         if (playerHoverBoard.gameManager == null){
             playerHoverBoard.gameManager = GetComponent<GameManager>();
         }
         if (playerHoverBoard) {
             playerHoverBoard.ApplyShieldBooster(shield, timer, true);
+            SetScore((int)(shield), item);
             SetShieldBoosterGUI(true);
         }
         if (shieldBoosterBar){
@@ -289,12 +306,14 @@ public class GameManager : MonoBehaviour {
     }
     public void SetShieldBoosterGUI(bool active){
          useShield = active;
-         shieldBoosterGUI.SetActive(active);
-         candyBarGUI.SetActive(!active);
+         shieldBoosterGUI.GetComponent<Image>().enabled = active;
+         
+         SetCandyBar(!active);
          
          if (active)
          {
-            speedBoosterGUI.SetActive(false);
+            speedBoosterGUI.GetComponent<Image>().enabled = false;
+            collectableItemText.text = "Shield";
          }
     }
     public void SetShieldBoosterBar(float value){
@@ -306,23 +325,24 @@ public class GameManager : MonoBehaviour {
     
     public void SetBonus(int point, string item){
         DisableCollectableGUIs();
-        trophy.SetActive(true);
+        trophy.GetComponent<Image>().enabled = true;
+        collectableItemText.text = "Trophy";
         SetScore(point, item);
         GameWin();
     }
     
     void DisableCollectableGUIs() {
-        trophy.SetActive(false);
-        shieldBoosterGUI.SetActive(false);
-        candyBarGUI.SetActive(false);
-        speedBoosterGUI.SetActive(false);
+        trophy.GetComponent<Image>().enabled = false;
+        shieldBoosterGUI.GetComponent<Image>().enabled = false;
+        candyBarGUI.GetComponent<Image>().enabled = false;
+        speedBoosterGUI.GetComponent<Image>().enabled = false;
     }
     
     void GameWin(){
 
         if (endOfAsteroidAttack)
         {
-             Invoke("ActivateGameWin", 5); // inseconds
+             Invoke("ActivateGameWin", 3); // inseconds
         }
         
     }

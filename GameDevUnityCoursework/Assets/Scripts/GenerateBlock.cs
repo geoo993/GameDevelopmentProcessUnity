@@ -10,7 +10,13 @@ public class GenerateBlock : MonoBehaviour {
     public static int blocksCreated = 2;
     public static int blocksDestroyed = 0;
     private bool ShouldCollider = true;
-    
+
+    private void Start()
+    {
+        blocksCreated = 2;
+        blocksDestroyed = 0;
+    }
+
     void GenerateNewBlock(){
         
         Vector3 blockPosition = new Vector3(0.0f, 0.0f, 100.0f * blocksCreated);

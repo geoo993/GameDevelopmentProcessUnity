@@ -42,10 +42,10 @@ public class CollectableItem : MonoBehaviour {
                 FindObjectOfType<GameManager>().SetHealth(value, true);
                     break;
             case CollectionType.Speed:
-                FindObjectOfType<GameManager>().SetSpeedBooster(value, 10.0f);
+                FindObjectOfType<GameManager>().SetSpeedBooster(value, 10.0f, gameObject.name);
                     break;
             case CollectionType.Shield:
-                FindObjectOfType<GameManager>().SetShieldBooster(value, 10.0f);
+                FindObjectOfType<GameManager>().SetShieldBooster(value, 10.0f, gameObject.name);
                     break;
             case CollectionType.Bonus:
                 FindObjectOfType<GameManager>().SetBonus(value, gameObject.name);

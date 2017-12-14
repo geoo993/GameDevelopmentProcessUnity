@@ -15,6 +15,7 @@ public class MouseOrbit : MonoBehaviour {
 
     private float x = 0.0f;
     private float y = 0.0f;
+    private bool stopTrackingMouse = false;
 
     /*
     This is the same as the script from Unity's Standard Assets
@@ -36,11 +37,21 @@ public class MouseOrbit : MonoBehaviour {
         
     }
 
+    void Update()
+    {
+        Invoke("StopTrackingMousePosition", 5);
+    }
+
     void LateUpdate () {
     
         if (target) {
-            x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
-            y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+
+            if (stopTrackingMouse == false)
+            {
+                x += Input.GetAxis("Mouse X") * xSpeed * 0.02f;
+                y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
+            }
+            
             distance += Input.mouseScrollDelta.y * 0.2f; // Line added
             Vector3 offset = new Vector3(0.0f, 0.0f, -distance);
             
@@ -62,6 +73,9 @@ public class MouseOrbit : MonoBehaviour {
             angle -= 360;
         return Mathf.Clamp (angle, min, max);
     }
-
+    
+    void StopTrackingMousePosition(){
+        stopTrackingMouse = true;
+    }
 
 }

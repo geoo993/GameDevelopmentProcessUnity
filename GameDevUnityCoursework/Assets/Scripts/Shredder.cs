@@ -20,6 +20,10 @@ public class Shredder : MonoBehaviour {
 
     private bool damagePlayer = true;
     
+    void Start(){
+        transform.position = new Vector3(0.0f, 50.0f, -200.0f);
+    }
+    
     void ShredRamps(){
         ramps = GameObject.FindGameObjectsWithTag("Ramp");
         foreach (GameObject ramp in ramps){

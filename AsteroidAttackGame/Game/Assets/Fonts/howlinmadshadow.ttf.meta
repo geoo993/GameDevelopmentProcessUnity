@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 23f830466c56c434f99ce5a425ddab7d
+timeCreated: 1512248854
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Howlin' Mad Shadow
+  fontNames:
+  - Howlin' Mad Shadow
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

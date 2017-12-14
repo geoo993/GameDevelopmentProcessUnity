@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e9b6d43e07278499482f059b85fd66dc
+timeCreated: 1512248855
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Chrome
+  fontNames:
+  - Racket Squad Chrome
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

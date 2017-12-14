@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: c03e221d16dc84154b0e6d80c0e80d69
+timeCreated: 1512248854
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Punch Italic
+  fontNames:
+  - Racket Squad Punch Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 595e6a7c0fdf34d47b7413c60de4f113
+timeCreated: 1512248854
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Chrome Italic
+  fontNames:
+  - Racket Squad Chrome Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

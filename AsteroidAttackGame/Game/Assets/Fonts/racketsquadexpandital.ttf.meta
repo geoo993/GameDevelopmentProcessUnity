@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: fd8b9ac8e87584a09a1667ac91eeb204
+timeCreated: 1512248855
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Racket Squad Expanded Italic
+  fontNames:
+  - Racket Squad Expanded Italic
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Damage : MonoBehaviour {
+public class Damage : MonoBehaviour
+{
 
     public float damageToPlayer;
     public bool autoDestroy = true;
 
     private bool damagePlayer = true;
+
+    GameManager gameManager
+    {
+        get
+        {
+            return FindObjectOfType<GameManager>();
+        }
+    }
+                
     
     void OnCollisionEnter(Collision collision)
     {
@@ -16,7 +26,10 @@ public class Damage : MonoBehaviour {
 
             if (damagePlayer)
             {
-                FindObjectOfType<GameManager>().SetHealth(damageToPlayer, false);
+                if (gameManager.useShield == false)
+                {
+                    gameManager.SetHealth(damageToPlayer, false);
+                }
                 
                 if (autoDestroy){
                     Destroy(gameObject);

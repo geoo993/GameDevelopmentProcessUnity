@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour {
     
     public Slider shieldBoosterBar = null;
 	public GameObject shieldBoosterGUI = null;
+    public bool useShield = false;
     
     public GameObject trophy;
     
@@ -287,6 +288,7 @@ public class GameManager : MonoBehaviour {
         }
     }
     public void SetShieldBoosterGUI(bool active){
+         useShield = active;
          shieldBoosterGUI.SetActive(active);
          candyBarGUI.SetActive(!active);
          
